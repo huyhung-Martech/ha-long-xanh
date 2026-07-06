@@ -2011,70 +2011,241 @@
 
           <!-- TAB 9: CHÍNH SÁCH BÁN HÀNG -->
           <div v-else-if="activeTab === 'policy'" class="space-y-6">
-            <!-- 1. PHƯƠNG ÁN THANH TOÁN & CHÍNH SÁCH BÁN HÀNG -->
+            <!-- 1. PHƯƠNG ÁN THANH TOÁN & CHÍNH SÁCH BÁN HÀNG THỰC TẾ -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
               <div class="space-y-1">
                 <h3 class="text-caption text-emerald-500 flex items-center gap-1.5">
-                  <i class="bi bi-percent"></i> PHƯƠNG ÁN THANH TOÁN
+                  <i class="bi bi-percent"></i> CHƯƠNG TRÌNH ƯU ĐÃI & THANH TOÁN
                 </h3>
                 <h2 class="text-h1 uppercase tracking-wide text-primary">
-                  CHÍNH SÁCH BÁN HÀNG & HỖ TRỢ ĐỘT PHÁ
+                  CHÍNH SÁCH BÁN HÀNG CHÍNH THỨC
                 </h2>
                 <p class="text-caption text-slate-400 mt-1">
-                  Mở ra cơ hội sở hữu bất động sản Vinhomes Global Gate Hạ Long cao cấp với rào cản tài chính thấp nhất thị trường.
+                  Tổng hợp chính sách bán hàng dự án Vinhomes Global Gate Hạ Long cập nhật tháng 05/2026 từ Chủ đầu tư.
                 </p>
               </div>
 
-              <!-- Options Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Sub-tabs Selector -->
+              <div class="flex flex-wrap gap-2 border-b border-slate-100 pb-3">
+                <button 
+                  @click="policySubTab = 'xayluon'"
+                  :class="policySubTab === 'xayluon' ? 'bg-[#169f72] text-white shadow-sm' : 'bg-slate-150 text-slate-600 hover:bg-slate-200'"
+                  class="px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 font-label"
+                >
+                  <i class="bi bi-building-check text-xs"></i> QUỸ CĂN XÂY LUÔN (VỊNH BÌNH MINH 1)
+                </button>
+                <button 
+                  @click="policySubTab = 'gianxay'"
+                  :class="policySubTab === 'gianxay' ? 'bg-[#169f72] text-white shadow-sm' : 'bg-slate-150 text-slate-600 hover:bg-slate-200'"
+                  class="px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 font-label"
+                >
+                  <i class="bi bi-house-gear text-xs"></i> QUỸ CĂN THÔ GIÃN XÂY (VỊNH THIÊN ĐƯỜNG 1)
+                </button>
+                <button 
+                  @click="policySubTab = 'chung'"
+                  :class="policySubTab === 'chung' ? 'bg-[#169f72] text-white shadow-sm' : 'bg-slate-150 text-slate-600 hover:bg-slate-200'"
+                  class="px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 font-label"
+                >
+                  <i class="bi bi-gift text-xs"></i> ƯU ĐÃI CHUNG & TIẾN ĐỘ KÝ QUỸ
+                </button>
+              </div>
+
+              <!-- Options Grid for Sub-tab: Xây luôn (Vịnh Bình Minh 1) -->
+              <div v-if="policySubTab === 'xayluon'" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Option 1 -->
-                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-1">
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
                   <div class="space-y-3">
                     <div class="flex justify-between items-center">
-                      <span class="text-caption text-slate-400">Phương án 1</span>
-                      <span class="text-xs font-black bg-blue-50 text-blue-600 border border-blue-100 px-2.5 py-0.5 rounded-lg">Hỗ trợ 0% LS</span>
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 1</span>
+                      <span class="text-[10px] font-black bg-emerald-50 text-[#169f72] border border-emerald-100 px-2 py-0.5 rounded-md">Chiết khấu đến 9%</span>
                     </div>
-                    <h4 class="text-h2 uppercase tracking-wide text-primary">Vay Vốn Ngân Hàng</h4>
-                    <p class="text-body leading-relaxed">
-                      Hỗ trợ giải ngân tối đa 80% GTCH qua Techcombank. Lãi suất 0% kéo dài tới 24 tháng, ân hạn nợ gốc suốt thời gian hỗ trợ lãi suất.
-                    </p>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Thanh Toán Sớm Bằng Vốn Tự Có</h4>
+                    <ul class="text-xs text-slate-500 space-y-2 list-disc list-inside leading-relaxed">
+                      <li><strong>Chiết khấu 9%</strong> vào Giá Gốc khi ký Tài liệu GD đầu tiên từ 20/04/2026 đến hết 20/07/2026.</li>
+                      <li><strong>Chiết khấu 7.5%</strong> vào Giá Gốc khi ký sau ngày 20/07/2026.</li>
+                      <li>Thanh toán trong vòng 15 ngày kể từ ngày ký HĐMB/HĐT đúng hạn.</li>
+                      <li><strong>Lãi suất 11%/năm</strong> trên số tiền & số ngày thanh toán trước hạn nếu trả sớm từng đợt.</li>
+                    </ul>
                   </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-3 rounded-xl text-center">
-                    <span class="text-caption text-slate-700">Chỉ cần chuẩn bị vốn tự có 15% - 20% ban đầu.</span>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Tối ưu dòng tiền cho khách hàng sẵn vốn tự có.</span>
                   </div>
                 </div>
 
                 <!-- Option 2 -->
-                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-1">
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
                   <div class="space-y-3">
                     <div class="flex justify-between items-center">
-                      <span class="text-caption text-slate-400">Phương án 2</span>
-                      <span class="text-xs font-black bg-emerald-50 text-emerald-600 border border-emerald-100 px-2.5 py-0.5 rounded-lg">Chiết khấu -8%</span>
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 2</span>
+                      <span class="text-[10px] font-black bg-blue-50 text-blue-600 border border-blue-100 px-2 py-0.5 rounded-md">Tiến độ 7 đợt</span>
                     </div>
-                    <h4 class="text-h2 uppercase tracking-wide text-primary">Thanh Toán Theo Tiến Độ</h4>
-                    <p class="text-body leading-relaxed">
-                      Nhận chiết khấu trực tiếp 8% giá trị căn hộ. Thanh toán chia làm 8 đợt cách nhau 3 tháng trong suốt 2 năm, giảm gánh nặng tài chính.
-                    </p>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Thanh Toán Theo Tiến Độ Thường</h4>
+                    <ul class="text-xs text-slate-500 space-y-1.5 list-decimal list-inside leading-relaxed">
+                      <li>Đặt cọc: 200,000,000 đ/căn.</li>
+                      <li><strong>Lần 1 (T+15 ngày):</strong> 10% giá trị căn hộ + 5% vào thỏa thuận đặt cọc đảm bảo (được nhận lãi 9.5%/năm).</li>
+                      <li><strong>Lần 2, 3, 4, 5:</strong> Đóng 15% mỗi đợt (sau mỗi 15 - 90 ngày).</li>
+                      <li><strong>Lần 6 (Bàn giao):</strong> 25% + 100% KPBT.</li>
+                      <li><strong>Lần 7 (Cấp GCN):</strong> 5% (Khấu trừ từ cọc).</li>
+                    </ul>
                   </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-3 rounded-xl text-center">
-                    <span class="text-caption text-slate-700">Mỗi đợt thanh toán chỉ từ 10% giá trị hợp đồng.</span>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Chủ đầu tư trả lãi 9.5%/năm cho khoản đặt cọc 5% đảm bảo.</span>
                   </div>
                 </div>
 
                 <!-- Option 3 -->
-                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-1">
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
                   <div class="space-y-3">
                     <div class="flex justify-between items-center">
-                      <span class="text-caption text-slate-400">Phương án 3</span>
-                      <span class="text-xs font-black bg-amber-50 text-amber-600 border border-amber-100 px-2.5 py-0.5 rounded-lg">Chiết khấu -15%</span>
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 3</span>
+                      <span class="text-[10px] font-black bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-md">HTLS 0% đến 60T</span>
                     </div>
-                    <h4 class="text-h2 uppercase tracking-wide text-primary">Thanh Toán Sớm 95%</h4>
-                    <p class="text-body leading-relaxed">
-                      Nhận chiết khấu tối đa lên tới 15% GTCH khi ký hợp đồng mua bán và giải ngân sớm 95% bằng nguồn vốn tự có.
-                    </p>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Hỗ Trợ Lãi Suất Ngân Hàng</h4>
+                    <ul class="text-xs text-slate-500 space-y-2 list-disc list-inside leading-relaxed">
+                      <li>Mức vay: Lên tới <strong>70% giá trị căn hộ</strong> (gồm VAT).</li>
+                      <li>Lãi suất <strong>0%</strong> trong thời gian HTLS: Khách hàng tùy chọn thời hạn 18, 24, 30, 36 hoặc 60 tháng.</li>
+                      <li>Siêu HTLS (trước 20/07): Tăng giá bán tương ứng (18T: 0% | 24T: 4.5% | 30T: 9% | 36T: 14% | 60T: 25%).</li>
+                      <li><strong>Ân hạn nợ gốc & Miễn phí trả nợ trước hạn</strong> trong suốt thời gian HTLS.</li>
+                      <li>Bảo đảm lãi suất trần tối đa <strong>9%/năm trong 24 tháng</strong> sau thời gian HTLS.</li>
+                    </ul>
                   </div>
-                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-3 rounded-xl text-center">
-                    <span class="text-caption text-slate-700">Tối ưu hóa dòng tiền tối đa cho nhà đầu tư sẵn vốn.</span>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Giúp khách hàng linh hoạt chọn gói vay phù hợp tài chính.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Options Grid for Sub-tab: Giãn xây (Vịnh Thiên Đường Nhiệt Đới 1) -->
+              <div v-else-if="policySubTab === 'gianxay'" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Option 1 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 1</span>
+                      <span class="text-[10px] font-black bg-emerald-50 text-[#169f72] border border-emerald-100 px-2 py-0.5 rounded-md">Chiết khấu đến 9%</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Thanh Toán Sớm Bằng Vốn Tự Có</h4>
+                    <ul class="text-xs text-slate-500 space-y-2 list-disc list-inside leading-relaxed">
+                      <li><strong>Chiết khấu 9%</strong> vào Giá trị QSD Đất và Thương mại (chưa VAT/KPBT) cho giao dịch ký từ 20/04/2026 đến hết 20/07/2026.</li>
+                      <li><strong>Chiết khấu 7.5%</strong> nếu ký sau ngày 20/07/2026.</li>
+                      <li>Điều kiện: Thanh toán trong vòng 15 ngày kể từ ngày ký HĐMB/HĐT đúng hạn.</li>
+                      <li>Hưởng lãi chiết khấu <strong>11%/năm</strong> trên số tiền & số ngày thanh toán trước hạn.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Áp dụng trực tiếp trên Giá trị QSD Đất và Thương mại.</span>
+                  </div>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 2</span>
+                      <span class="text-[10px] font-black bg-blue-50 text-blue-600 border border-blue-100 px-2 py-0.5 rounded-md">Giãn xây 2 năm</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Tiến Độ Thường (Chia 2 Giai Đoạn)</h4>
+                    <p class="text-[11px] text-slate-500 font-bold leading-normal">
+                      Giảm tối đa áp lực tài chính nhờ tách biệt thanh toán Đất và Xây dựng:
+                    </p>
+                    <ul class="text-[11px] text-slate-500 space-y-1 list-disc list-inside leading-normal">
+                      <li><strong>Phần 1: Giá trị QSD Đất & Thương mại:</strong> Thanh toán chia làm 8 đợt cách nhau trong năm đầu tiên (Đợt 1 đóng 10% + 5% cọc nhận lãi 9.5%/năm).</li>
+                      <li><strong>Phần 2: Giá trị Xây dựng:</strong> Bắt đầu thanh toán từ 2 năm sau (ngày thứ D+720), chia nhỏ làm 7 đợt đóng trong suốt quá trình xây thô.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Phần tiền xây dựng lùi tiến độ đóng sau 2 năm.</span>
+                  </div>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Phương án 3</span>
+                      <span class="text-[10px] font-black bg-purple-50 text-purple-600 border border-purple-100 px-2 py-0.5 rounded-md">Vay đến 80% QSD Đất</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Hỗ Trợ Lãi Suất Ngân Hàng</h4>
+                    <ul class="text-xs text-slate-500 space-y-1.5 list-disc list-inside leading-relaxed">
+                      <li><strong>Mức vay lựa chọn:</strong> Hỗ trợ vay tối đa 70% (Lựa chọn 1) hoặc vay tối đa 80% (Lựa chọn 2) của Giá trị QSD Đất và Thương mại.</li>
+                      <li>Lãi suất <strong>0%</strong> trong suốt thời gian hỗ trợ (18, 24, 30, 36 hoặc 60 tháng).</li>
+                      <li>Bảo đảm lãi suất trần tối đa <strong>9%/năm trong 24 tháng</strong> sau thời gian HTLS.</li>
+                      <li><strong>Ân hạn nợ gốc & Miễn phí trả nợ trước hạn</strong> trong suốt thời gian HTLS.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">HTLS 0% áp dụng trực tiếp cho khoản vay QSD Đất & Thương mại.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Options Grid for Sub-tab: Ưu đãi chung & Ký quỹ -->
+              <div v-else-if="policySubTab === 'chung'" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Gift 1 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Quà tặng</span>
+                      <span class="text-[10px] font-black bg-red-50 text-red-600 border border-red-100 px-2 py-0.5 rounded-md">Tặng PQL & Voucher</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Quà Tặng Từ Chủ Đầu Tư</h4>
+                    <ul class="text-xs text-slate-500 space-y-2.5 list-disc list-inside leading-relaxed">
+                      <li><strong>Miễn 36 tháng Phí quản lý:</strong> Tặng gói phí quản lý dịch vụ nhà ở trong vòng 3 năm đầu tính từ thời điểm nhận bàn giao nhà.</li>
+                      <li><strong>Quà tặng Sức khỏe:</strong> Tặng 01 Voucher chăm sóc sức khỏe <strong>VINMEC FAMILY CARE PLUS</strong> trị giá <strong>100 triệu VNĐ</strong> (áp dụng tối đa cho 6 thành viên) cho các giao dịch hoàn tất thủ tục ký mới từ 04/05/2026 đến hết 30/06/2026.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Quà tặng độc quyền hỗ trợ tốt nhất cho cư dân về sinh sống.</span>
+                  </div>
+                </div>
+
+                <!-- Gift 2 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Ưu đãi</span>
+                      <span class="text-[10px] font-black bg-amber-50 text-amber-600 border border-amber-100 px-2 py-0.5 rounded-md">Đặc quyền VinClub</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Ưu Đãi Chiết Khấu VinClub</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Thành viên VinClub khi thực hiện giao dịch mua/thuê căn hộ sẽ nhận chiết khấu trực tiếp vào giá bán & tích điểm VPoint cụ thể:
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 list-disc list-inside leading-relaxed">
+                      <li><strong>Hạng Vàng (Gold):</strong> Ưu đãi <strong>0.5%</strong>.</li>
+                      <li><strong>Hạng Bạch Kim (Platinum):</strong> Ưu đãi <strong>0.7%</strong>.</li>
+                      <li><strong>Hạng Kim Cương (Diamond):</strong> Ưu đãi <strong>0.9%</strong>.</li>
+                      <li><i>Cách phân bổ:</i> 50% chiết khấu trực tiếp vào giá trị BĐS chưa VAT/KPBT; 50% quy đổi tích điểm VPoint tại thời điểm nhận bàn giao nhà.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Đặc quyền tích lũy hệ sinh thái Vingroup.</span>
+                  </div>
+                </div>
+
+                <!-- Gift 3 -->
+                <div class="card-premium p-5 flex flex-col justify-between hover:-translate-y-0.5 transition-transform border border-slate-100">
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-[10px] text-slate-400 font-extrabold uppercase">Tiến độ cọc</span>
+                      <span class="text-[10px] font-black bg-blue-50 text-blue-600 border border-blue-100 px-2 py-0.5 rounded-md">Cọc 200 Triệu</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-[#0b2545] font-label uppercase">Thủ Tục Ký Quỹ Đăng Ký</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Áp dụng cho KH tham gia khảo sát & đăng ký nguyện vọng chọn căn từ 04/05/2026:
+                    </p>
+                    <ul class="text-xs text-slate-500 space-y-1.5 list-disc list-inside leading-relaxed">
+                      <li><strong>Lần 1 (Ký TT Ký quỹ):</strong> Nộp <strong>200,000,000 VNĐ / căn</strong>.</li>
+                      <li><strong>Lần 2 (Trong vòng 10 ngày):</strong>
+                        <ul class="pl-4 list-disc space-y-1">
+                          <li>Quỹ giãn xây: Nộp đủ 10% Giá trị QSD Đất và Thương mại (không gồm VAT).</li>
+                          <li>Quỹ xây luôn: Nộp đủ 10% Tổng Giá trị BĐS (không gồm VAT).</li>
+                        </ul>
+                      </li>
+                      <li><strong>Ký HĐMB / HĐT chính thức:</strong> Dự kiến diễn ra trong <strong>Tháng 06/2026</strong>.</li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-slate-100 bg-slate-50 p-2.5 rounded-lg text-center">
+                    <span class="text-[10px] font-extrabold text-slate-550">Cơ hội đặt chỗ sớm các vị trí đắc địa nhất dự án.</span>
                   </div>
                 </div>
               </div>
@@ -3755,7 +3926,7 @@
   <!-- Bọc dữ liệu nhúng tĩnh vào window object -->
   <script>
     window.__VGGHL_DATA__ = {
-      project: {"id":1334,"projectId":1334,"code":"VGGHL","name":"VINHOMES GLOBAL GATE HẠ LONG","slogan":"Hạ Long Xanh - Thành phố kỳ quan kết nối toàn cầu bên Vịnh Di Sản","address":"Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh","investor":"VINHOMES","totalArea":"6.220 ha","totalInvestment":"456.639 tỷ đồng (gần 18 tỷ USD)","populationScale":"Khoảng 380.000 người","productTypes":"Biệt thự, khách sạn, shophouse, căn hộ","startDate":"19/12/2025","project_type":"low_rise","ownership_type":"Sở hữu lâu dài","image_360":"https://kuula.co/share/LGKDq?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&zoom=1","iframe_location":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","location_html":"<p><img src=\"https://s3-hfx03.fptcloud.com/admin-bds/odoo/EmbeddedImage-project_location-1_bfaa837b46271e8e921c12e5963abbd197d6ad65\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long không chỉ là nơi an cư mà còn là “trạm trung chuyển giá trị” của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối siêu tốc qua tuyến đường sắt cao tốc, mở rộng cơ hội làm việc – kinh doanh liên vùng, đón dòng khách thủ đô đổ về cuối tuần.</p><p>🚗<strong> 30 phút tới Hải Phòng</strong>: Liên kết nhanh với trung tâm công nghiệp – cảng biển lớn nhất miền Bắc, gia tăng tiềm năng khai thác thương mại và logistics.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/sân bay quốc tế Cát Bi (Hải Phòng): </strong>Đón trọn dòng khách quốc tế, thúc đẩy kinh doanh lưu trú – dịch vụ – du lịch cao cấp.</p><p>🌍 <strong>2 giờ tới Móng Cái:</strong> Chạm cửa khẩu quốc tế, mở rộng giao thương xuyên biên giới – đòn bẩy tăng trưởng dài hạn.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Tạo thành trục du lịch - đô thị ven biển sầm uất tại Quảng Ninh.<strong></strong></p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển qua cao tốc Hà Nội - Hạ Long kết nối trực tiếp tới thủ đô.</p><p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n</p>","link_general":[{"link_utility_name":"CSBH","link_utility_url":"https://drive.google.com/drive/folders/1hJEJqStEN9QhyZsTieI6JqQBEBy-KY5L?usp=drive_link"},{"link_utility_name":"Layout Thiết Kế","link_utility_url":"https://drive.google.com/drive/folders/1yE5LEFaEZ9Jtw3EfAxGHWqsNevqJpCwE?usp=drive_link"},{"link_utility_name":"Phối Cảnh","link_utility_url":"https://drive.google.com/drive/folders/1Xi2L0efDOcCBrn5HpPqtkTUbU-utXTYz?usp=drive_link"},{"link_utility_name":"Slide Đào Tạo","link_utility_url":"https://drive.google.com/drive/folders/1lgWZdBuutqeXgbfOx7CkJnEzsJNa6jpv?usp=drive_link"},{"link_utility_name":"Tiện Ích","link_utility_url":"https://drive.google.com/drive/folders/1vmuLNr9XsMLIlfGQNooRdn2tRt_Rt1tr?usp=drive_link"},{"link_utility_name":"Tổng Mặt Bằng","link_utility_url":"https://drive.google.com/drive/folders/1tkDnglUKNmK7dONxS22dSBnnECiG53Dm?usp=drive_link"},{"link_utility_name":"Video","link_utility_url":"https://drive.google.com/drive/folders/1iGmBm-11CaDednMFI0SsmUxYlwX3lt1V?usp=drive_link"}],"avatar_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65","image_data":[{"image_coordinate_code":"avaVTD","image_coordinate_name":"avaVTD","image_data":[{"image_name":"avaVTD.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/avaVTD.jpg_4aeed9f3d439c7ed748af33678437c24bae56197"}]},{"image_coordinate_code":"hlx1","image_coordinate_name":"hlx1","image_data":[{"image_name":"01.Cam tổng.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65"}]}],"typicalLayouts":[{"name":"MẶT BẰNG TỔNG THỂ","image":"images/masterplan_tongquan.jpg"},{"name":"MẶT BẰNG PHÂN KHU VỊNH THIÊN ĐƯỜNG","image":"images/masterplan_vinhthienduong.jpg"}],"utilities":[{"name":"CÔNG VIÊN RỪNG GLOBE HẠ LONG","image":"images/utilities/cong-vien-rung-globe-ha-long.jpg"},{"name":"TOD GA DEPOT & OUTLET","image":"images/utilities/tod-ga-depot-outlet.jpg"},{"name":"QUẦN THỂ 12 SÂN GOLF","image":"images/utilities/quan-the-12-san-golf.jpg"},{"name":"CÔNG VIÊN VCGT VINWONDERS","image":"images/utilities/cong-vien-vcgt-vinwonders.jpg"},{"name":"THÁP VĂN PHÒNG WONDER TOWER","image":"images/utilities/thap-van-phong-wonder-tower.jpg"},{"name":"NHÀ HÁT WONDER THEATER","image":"images/utilities/nha-hat-wonder-theater.jpg"},{"name":"RỪNG NGẬP MẶN WONDER MANGROVE","image":"images/utilities/rung-ngap-man-wonder-mangrove.jpg"},{"name":"HỆ THỐNG KHÁCH SẠN, RESORT & SÒNG BẠC HOÀNG GIA CASINO ROYAL BAY","image":"images/utilities/he-thong-khach-san-resort-song-bac-hoang-gia-casino-royal-bay.jpg"},{"name":"CÔNG VIÊN NỘI KHU","image":"images/utilities/cong-vien-noi-khu.jpg"},{"name":"BIỂN LAGOON","image":"images/utilities/bien-lagoon.jpg"}],"floorPlans":[{"code":"LK","name":"Liền kề sinh thái","area":"75 - 90 m²","quantity":"4 tầng","image":"images/utilities/lien-ke.jpg"},{"code":"SH","name":"Dinh thự","area":"90 - 120 m²","quantity":"4 tầng + 1 tum","image":"images/utilities/dinh-thu.jpg"},{"code":"BT-SL","name":"Biệt thự Song lập","area":"150 - 220 m²","quantity":"3 tầng + 1 tum","image":"images/utilities/biet-thu-song-lap.jpg"},{"code":"BT-DL","name":"Biệt thự Đơn lập","area":"250 - 450 m²","quantity":"3 tầng","image":"images/utilities/biet-thu-don-lap.jpg"}],"contactAdvisors":[{"name":"GĐDA-Mr. Hùng Trần","phone":"0926066888"},{"name":"Admin dự án-Ms. Khánh Huyền","phone":"0926066888"}],"introText":"Vinhomes Global Gate Hạ Long – siêu đô thị sinh thái đẳng cấp hàng đầu miền Bắc, được phát triển bởi Tập đoàn Vingroup, mang đến chuẩn sống xanh – thông minh – nghỉ dưỡng ngay giữa trung tâm vùng kinh tế trọng điểm Quảng Ninh – Hải Phòng. Dự án diện tích 6.206ha, tổng dự án 18 tỷ USD, tọa lạc tại khu vực Hạ Long – Quảng Yên, sở hữu kết nối chiến lược đến trung tâm Hạ Long, Hải Phòng và các khu công nghiệp lớn. Với quy hoạch đồng bộ hàng nghìn hecta, Vinhomes Hạ Long Xanh không chỉ mang lại môi trường an cư lý tưởng mà còn mở ra cơ hội đầu tư giàu tiềm năng trong những năm tới.","overviewImage":"images/intro_banner.jpg","sliderImages":["images/intro_banner.jpg","images/slider_1.jpg","images/slider_2.jpg","images/slider_3.jpg","images/slider_4.jpg"]}
+      project: {"id":1334,"projectId":1334,"code":"VGGHL","name":"VINHOMES GLOBAL GATE HẠ LONG","slogan":"Hạ Long Xanh - Thành phố kỳ quan kết nối toàn cầu bên Vịnh Di Sản","address":"Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh","investor":"VINHOMES","totalArea":"6.220 ha","totalInvestment":"456.639 tỷ đồng (gần 18 tỷ USD)","populationScale":"Khoảng 380.000 người","productTypes":"Biệt thự, khách sạn, shophouse, căn hộ","startDate":"19/12/2025","project_type":"low_rise","ownership_type":"Sở hữu lâu dài","image_360":"https://kuula.co/share/LGKDq?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&zoom=1","iframeLocation":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","locationHtml":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long không chỉ là nơi an cư mà còn là “trạm trung chuyển giá trị” của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối siêu tốc qua tuyến đường sắt cao tốc, mở rộng cơ hội làm việc – kinh doanh liên vùng, đón dòng khách thủ đô đổ về cuối tuần.</p><p>🚗<strong> 30 phút tới Hải Phòng</strong>: Liên kết nhanh với trung tâm công nghiệp – cảng biển lớn nhất miền Bắc, gia tăng tiềm năng khai thác thương mại và logistics.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/sân bay quốc tế Cát Bi (Hải Phòng): </strong>Đón trọn dòng khách quốc tế, thúc đẩy kinh doanh lưu trú – dịch vụ – du lịch cao cấp.</p><p>🌍 <strong>2 giờ tới Móng Cái:</strong> Chạm cửa khẩu quốc tế, mở rộng giao thương xuyên biên giới – đòn bẩy tăng trưởng dài hạn.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Tạo thành trục du lịch - đô thị ven biển sầm uất tại Quảng Ninh.<strong></strong></p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển qua cao tốc Hà Nội - Hạ Long kết nối trực tiếp tới thủ đô.</p><p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n</p>","iframe_location":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","location_html":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long không chỉ là nơi an cư mà còn là “trạm trung chuyển giá trị” của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối siêu tốc qua tuyến đường sắt cao tốc, mở rộng cơ hội làm việc – kinh doanh liên vùng, đón dòng khách thủ đô đổ về cuối tuần.</p><p>🚗<strong> 30 phút tới Hải Phòng</strong>: Liên kết nhanh với trung tâm công nghiệp – cảng biển lớn nhất miền Bắc, gia tăng tiềm năng khai thác thương mại và logistics.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/sân bay quốc tế Cát Bi (Hải Phòng): </strong>Đón trọn dòng khách quốc tế, thúc đẩy kinh doanh lưu trú – dịch vụ – du lịch cao cấp.</p><p>🌍 <strong>2 giờ tới Móng Cái:</strong> Chạm cửa khẩu quốc tế, mở rộng giao thương xuyên biên giới – đòn bẩy tăng trưởng dài hạn.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Tạo thành trục du lịch - đô thị ven biển sầm uất tại Quảng Ninh.<strong></strong></p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển qua cao tốc Hà Nội - Hạ Long kết nối trực tiếp tới thủ đô.</p><p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n</p>","link_general":[{"link_utility_name":"CSBH","link_utility_url":"https://drive.google.com/drive/folders/1hJEJqStEN9QhyZsTieI6JqQBEBy-KY5L?usp=drive_link"},{"link_utility_name":"Layout Thiết Kế","link_utility_url":"https://drive.google.com/drive/folders/1yE5LEFaEZ9Jtw3EfAxGHWqsNevqJpCwE?usp=drive_link"},{"link_utility_name":"Phối Cảnh","link_utility_url":"https://drive.google.com/drive/folders/1Xi2L0efDOcCBrn5HpPqtkTUbU-utXTYz?usp=drive_link"},{"link_utility_name":"Slide Đào Tạo","link_utility_url":"https://drive.google.com/drive/folders/1lgWZdBuutqeXgbfOx7CkJnEzsJNa6jpv?usp=drive_link"},{"link_utility_name":"Tiện Ích","link_utility_url":"https://drive.google.com/drive/folders/1vmuLNr9XsMLIlfGQNooRdn2tRt_Rt1tr?usp=drive_link"},{"link_utility_name":"Tổng Mặt Bằng","link_utility_url":"https://drive.google.com/drive/folders/1tkDnglUKNmK7dONxS22dSBnnECiG53Dm?usp=drive_link"},{"link_utility_name":"Video","link_utility_url":"https://drive.google.com/drive/folders/1iGmBm-11CaDednMFI0SsmUxYlwX3lt1V?usp=drive_link"}],"avatar_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65","image_data":[{"image_coordinate_code":"avaVTD","image_coordinate_name":"avaVTD","image_data":[{"image_name":"avaVTD.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/avaVTD.jpg_4aeed9f3d439c7ed748af33678437c24bae56197"}]},{"image_coordinate_code":"hlx1","image_coordinate_name":"hlx1","image_data":[{"image_name":"01.Cam tổng.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65"}]}],"typicalLayouts":[{"name":"MẶT BẰNG TỔNG THỂ","image":"images/masterplan_tongquan.jpg"},{"name":"MẶT BẰNG PHÂN KHU VỊNH THIÊN ĐƯỜNG","image":"images/masterplan_vinhthienduong.jpg"}],"utilities":[{"name":"CÔNG VIÊN RỪNG GLOBE HẠ LONG","image":"images/utilities/cong-vien-rung-globe-ha-long.jpg"},{"name":"TOD GA DEPOT & OUTLET","image":"images/utilities/tod-ga-depot-outlet.jpg"},{"name":"QUẦN THỂ 12 SÂN GOLF","image":"images/utilities/quan-the-12-san-golf.jpg"},{"name":"CÔNG VIÊN VCGT VINWONDERS","image":"images/utilities/cong-vien-vcgt-vinwonders.jpg"},{"name":"THÁP VĂN PHÒNG WONDER TOWER","image":"images/utilities/thap-van-phong-wonder-tower.jpg"},{"name":"NHÀ HÁT WONDER THEATER","image":"images/utilities/nha-hat-wonder-theater.jpg"},{"name":"RỪNG NGẬP MẶN WONDER MANGROVE","image":"images/utilities/rung-ngap-man-wonder-mangrove.jpg"},{"name":"HỆ THỐNG KHÁCH SẠN, RESORT & SÒNG BẠC HOÀNG GIA CASINO ROYAL BAY","image":"images/utilities/he-thong-khach-san-resort-song-bac-hoang-gia-casino-royal-bay.jpg"},{"name":"CÔNG VIÊN NỘI KHU","image":"images/utilities/cong-vien-noi-khu.jpg"},{"name":"BIỂN LAGOON","image":"images/utilities/bien-lagoon.jpg"}],"floorPlans":[{"code":"LK","name":"Liền kề sinh thái","area":"75 - 90 m²","quantity":"4 tầng","image":"images/utilities/lien-ke.jpg"},{"code":"SH","name":"Dinh thự","area":"90 - 120 m²","quantity":"4 tầng + 1 tum","image":"images/utilities/dinh-thu.jpg"},{"code":"BT-SL","name":"Biệt thự Song lập","area":"150 - 220 m²","quantity":"3 tầng + 1 tum","image":"images/utilities/biet-thu-song-lap.jpg"},{"code":"BT-DL","name":"Biệt thự Đơn lập","area":"250 - 450 m²","quantity":"3 tầng","image":"images/utilities/biet-thu-don-lap.jpg"}],"contactAdvisors":[{"name":"GĐDA-Mr. Hùng Trần","phone":"0926066888"},{"name":"Admin dự án-Ms. Khánh Huyền","phone":"0926066888"}],"introText":"Vinhomes Global Gate Hạ Long – siêu đô thị sinh thái đẳng cấp hàng đầu miền Bắc, được phát triển bởi Tập đoàn Vingroup, mang đến chuẩn sống xanh – thông minh – nghỉ dưỡng ngay giữa trung tâm vùng kinh tế trọng điểm Quảng Ninh – Hải Phòng. Dự án diện tích 6.206ha, tổng dự án 18 tỷ USD, tọa lạc tại khu vực Hạ Long – Quảng Yên, sở hữu kết nối chiến lược đến trung tâm Hạ Long, Hải Phòng và các khu công nghiệp lớn. Với quy hoạch đồng bộ hàng nghìn hecta, Vinhomes Hạ Long Xanh không chỉ mang lại môi trường an cư lý tưởng mà còn mở ra cơ hội đầu tư giàu tiềm năng trong những năm tới.","overviewImage":"images/intro_banner.jpg","sliderImages":["images/intro_banner.jpg","images/slider_1.jpg","images/slider_2.jpg","images/slider_3.jpg","images/slider_4.jpg"]}
     };
     window.__SUBDIVISIONS__ = [{"id":1001,"projectId":1334,"name":"PHÂN KHU VỊNH BÌNH MINH","floorCount":4,"image":"images/masterplan_vinhthienduong.jpg"},{"id":1002,"projectId":1334,"name":"PHÂN KHU THIÊN ĐƯỜNG NHIỆT ĐỚI","floorCount":4,"image":"images/masterplan_vinhthienduong.jpg"}]
     window.__DIRECTION_MAP__ = {"BM34-73":"Tây Nam","BM25-54":"Chính Bắc","BM79-11":"Đông Nam","BM73-38":"Đông Bắc","BM69-19":"Tây Bắc","BM65-08":"Chính Đông","BM60-23":"Tây Bắc","TĐ2-38":"Tây Nam","BM25-07":"Chính Tây","BM87-06":"Chính Nam","BM87-10":"Tây Nam"}
@@ -3837,6 +4008,7 @@
         const loginPhone = ref('');
 
         const activeTab = ref('overview');
+        const policySubTab = ref('xayluon');
         const activeTower = ref('tongquan');
         const zoomScale = ref(1.0);
         const showStatsOverlay = ref(false);
@@ -4967,6 +5139,7 @@
           loginPhone,
           mobileSidebarOpen,
           activeTab,
+          policySubTab,
           activeSlideIndex,
           activeTower,
           zoomScale,
