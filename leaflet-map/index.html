@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản đồ Phân lô Tương tác</title>
+  
+  <!-- Local Leaflet CSS -->
+  <link rel="stylesheet" href="shared/leaflet.css" />
+  
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared Map Styles -->
+  <link rel="stylesheet" href="shared/map-viewer.css?v=7" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <p id="loading-text">Đang tải dữ liệu phân lô...</p>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px;">
+        <h1 id="project-title" style="font-size: 18px; font-weight: 700; background: linear-gradient(to right, #38bdf8, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1;">Bản đồ Phân lô</h1>
+        <!-- Project Selector Dropdown -->
+        <select id="project-selector" onchange="changeProject(this.value)" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--glass-border); border-radius: 6px; color: var(--text-main); font-size: 12px; padding: 4px 8px; outline: none; cursor: pointer; max-width: 160px;">
+          <option value="vinh-xanh">Vịnh Xanh</option>
+          <option value="global-gate-ha-long">Vinhomes Global Gate</option>
+        </select>
+      </div>
+      <p id="project-subtitle" style="font-size: 13px; color: var(--text-muted);">Bản đồ phân lô tương tác</p>
+      
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="search-input" placeholder="Tìm theo mã căn (Ví dụ: 1-02)..." oninput="handleSearch()">
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Trạng thái hàng</div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" id="btn-all" onclick="filterStatus('all')">Tất cả</button>
+        <button class="filter-btn" id="btn-available" onclick="filterStatus('available')">Còn hàng</button>
+        <button class="filter-btn" id="btn-sold" onclick="filterStatus('sold')">Đã bán</button>
+      </div>
+    </div>
+
+    <div class="lot-list" id="lot-list">
+      <!-- Dynamic Lot Items -->
+    </div>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map-container">
+    <div id="map"></div>
+
+    <!-- Centering Button -->
+    <button class="map-center-btn" onclick="recenterMap()" title="Định tâm bản đồ">
+      <svg viewBox="0 0 24 24" width="18px" height="18px">
+        <path fill="#333" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+      </svg>
+    </button>
+
+    <!-- Floating Search Container -->
+    <div class="floating-search-container" id="floating-search-container">
+      <div class="form">
+        <button type="button" onclick="handleFloatingSearch()">
+          <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+            <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <input class="input" id="floating-search-input" placeholder="Tìm theo mã căn..." type="text" onfocus="showDropdown()" oninput="handleFloatingSearch()" onblur="hideDropdown()" />
+        <button class="reset" type="button" onclick="clearFloatingSearch()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <button type="button" class="dropdown-trigger-btn" onclick="toggleDropdown(event)">
+          <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+      </div>
+      <div class="floating-search-dropdown" id="floating-search-dropdown"></div>
+    </div>
+
+    <!-- Editor Toolbar -->
+    <div id="editor-toolbar">
+      <div class="toolbar-title">Chế độ Biên tập Phân lô</div>
+      <div class="toolbar-actions">
+        <button id="btn-toggle-edit" class="toolbar-btn" onclick="toggleEditMode()">
+          🔧 Bật Chỉnh sửa
+        </button>
+        <button id="btn-add-marker" class="toolbar-btn" style="display:none; background: #22c55e; border-color: #22c55e;" onclick="startAddingMarker()">
+          ➕ Thêm Marker Mới
+        </button>
+        <button id="btn-export-json" class="toolbar-btn primary" onclick="exportCoordinates()">
+          💾 Xuất tọa độ JSON
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export JSON Modal -->
+  <div id="export-modal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>Dữ liệu tọa độ mới (data.js)</h2>
+        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Bản đồ mới sử dụng hệ tọa độ chuẩn của Leaflet tiles. Hãy nhấn <strong>Tải file JSON</strong> hoặc sao chép nội dung dưới đây đè vào file <code>data.js</code> của dự án.</p>
+        <textarea id="json-output" class="json-textarea" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="toolbar-btn" onclick="copyJSON()">📋 Sao chép JSON</button>
+        <button class="toolbar-btn primary" onclick="downloadJSONFile()">📥 Tải file data.js</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Lot Modal -->
+  <div id="edit-modal" class="modal-overlay">
+    <div class="modal-container" style="width: 500px;">
+      <div class="modal-header">
+        <h2 id="edit-modal-title">Biên tập thông tin lô đất</h2>
+        <button class="modal-close-btn" onclick="closeEditModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 12px; max-height: 70vh; overflow-y: auto; padding-right: 4px;">
+        <input type="hidden" id="edit-index" />
+        <input type="hidden" id="edit-lat" />
+        <input type="hidden" id="edit-lng" />
+        
+        <div class="form-group">
+          <label class="form-label">Mã căn (Product Code)</label>
+          <input type="text" id="edit-code" class="form-input" placeholder="Ví dụ: VX5-62" />
+        </div>
+        
+        <div class="form-row" style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Trạng thái bán</label>
+            <select id="edit-state" class="form-input">
+              <option value="available">Còn hàng (Xanh lá)</option>
+              <option value="sold">Đã bán (Đỏ)</option>
+              <option value="locked">Đặt cọc (Cam)</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Giá bán (VNĐ hoặc Tỷ)</label>
+            <input type="number" id="edit-price" class="form-input" placeholder="Ví dụ: 26826483042" />
+          </div>
+        </div>
+        
+        <div class="form-row" style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Kiểu dáng Marker</label>
+            <select id="edit-shape" class="form-input">
+              <option value="circle">Hình tròn (Mặc định)</option>
+              <option value="square">Hình vuông bo góc</option>
+              <option value="pin">Ghim bản đồ</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Màu sắc Marker</label>
+            <select id="edit-color" class="form-input">
+              <option value="default">Theo trạng thái bán</option>
+              <option value="green">Xanh lá (Còn hàng)</option>
+              <option value="red">Đỏ (Đã bán)</option>
+              <option value="orange">Cam (Đặt cọc)</option>
+              <option value="blue">Xanh dương (Độc quyền)</option>
+              <option value="purple">Tím (VVIP)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Diện tích đất (m²)</label>
+            <input type="number" step="0.1" id="edit-land-area" class="form-input" placeholder="Ví dụ: 180" />
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Diện tích xây dựng (m²)</label>
+            <input type="number" step="0.1" id="edit-build-area" class="form-input" placeholder="Ví dụ: 400.8" />
+          </div>
+        </div>
+
+        <div class="form-row" style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Loại hình</label>
+            <input type="text" id="edit-type" class="form-input" placeholder="Ví dụ: Song lập, Đơn lập" />
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Hướng nhà</label>
+            <input type="text" id="edit-direction" class="form-input" placeholder="Ví dụ: Đông Nam" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Đường dẫn ảnh thiết kế / layout (Image URL)</label>
+          <input type="text" id="edit-image" class="form-input" placeholder="Ví dụ: images/layouts/mb-dien-hinh-toa-p5.jpg" />
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+        <button id="btn-delete-lot" class="toolbar-btn" style="background: #ef4444; border-color: #ef4444; margin-right: auto;" onclick="deleteLot()">🗑️ Xóa Lô</button>
+        <button class="toolbar-btn" onclick="closeEditModal()">Hủy</button>
+        <button class="toolbar-btn primary" onclick="saveLot()">💾 Lưu lại</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Premium Modal -->
+  <div id="detail-modal" class="modal-overlay">
+    <div class="modal-container" style="width: 850px; max-width: 95%; padding: 0; overflow: hidden; height: 550px; display: flex; flex-direction: row; border-radius: 16px;">
+      
+      <!-- Cột Trái: Ảnh thiết kế -->
+      <div class="detail-left" style="flex: 4.5; background: #0b0f19; position: relative; display: flex; align-items: center; justify-content: center; border-right: 1px solid rgba(255, 255, 255, 0.1);">
+        <img id="detail-image" src="" style="width: 100%; height: 100%; object-fit: contain;" />
+        <div id="detail-image-badge" style="position: absolute; top: 16px; left: 16px; background: #f59e0b; color: #000; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">
+          Quỹ Độc Quyền
+        </div>
+        <button onclick="toggleFullScreenImage()" style="position: absolute; top: 16px; right: 16px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; backdrop-filter: blur(4px);">
+          🔍
+        </button>
+      </div>
+      
+      <!-- Cột Phải: Thông tin chi tiết -->
+      <div class="detail-right" style="flex: 5.5; padding: 24px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto;">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px;">
+          <div>
+            <h2 id="detail-code" style="font-size: 24px; font-weight: 800; color: #f8fafc;">VX5-62</h2>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Bản đồ phân lô tương tác</p>
+          </div>
+          <span id="detail-state-badge" class="badge" style="padding: 6px 12px; font-size: 13px;">Còn hàng</span>
+        </div>
+
+        <!-- Info Body -->
+        <div style="display: flex; flex-direction: column; gap: 12px; flex: 1;">
+          <!-- Giá bán -->
+          <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.15); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 12px; color: #94a3b8; display: block; margin-bottom: 2px;">Giá bán niêm yết (Giá full):</span>
+              <span id="detail-price" style="font-size: 22px; font-weight: 800; color: #38bdf8;">-- Tỷ</span>
+            </div>
+            <div style="text-align: right;">
+              <span id="detail-unit-price" style="font-size: 12px; color: #94a3b8; display: block;">-- triệu/m²</span>
+            </div>
+          </div>
+
+          <!-- Thông số kỹ thuật -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px 12px;">
+              <span style="font-size: 11px; color: #94a3b8; display: block;">Diện tích đất:</span>
+              <span id="detail-land" style="font-size: 14px; font-weight: 600; color: #f8fafc; margin-top: 4px; display: block;">-- m²</span>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px 12px;">
+              <span style="font-size: 11px; color: #94a3b8; display: block;">Diện tích xây dựng:</span>
+              <span id="detail-build" style="font-size: 14px; font-weight: 600; color: #f8fafc; margin-top: 4px; display: block;">-- m²</span>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px 12px;">
+              <span style="font-size: 11px; color: #94a3b8; display: block;">Loại hình:</span>
+              <span id="detail-type" style="font-size: 14px; font-weight: 600; color: #f8fafc; margin-top: 4px; display: block;">--</span>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 10px 12px;">
+              <span style="font-size: 11px; color: #94a3b8; display: block;">Hướng nhà:</span>
+              <span id="detail-direction" style="font-size: 14px; font-weight: 600; color: #f8fafc; margin-top: 4px; display: block;">--</span>
+            </div>
+          </div>
+
+          <!-- CSBH & Quà tặng -->
+          <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 12px;">
+            <h4 style="font-size: 12px; font-weight: 700; color: #f8fafc; text-transform: uppercase; margin-bottom: 6px;">Chính sách bán hàng & Quà tặng</h4>
+            <p style="font-size: 12px; color: #94a3b8; line-height: 1.5;">Hỗ trợ lãi suất 70% trong 24 tháng, ân hạn nợ gốc. Quà tặng tân gia gói nội thất trị giá 150 triệu VNĐ.</p>
+          </div>
+        </div>
+
+        <!-- Footer / CTA Actions -->
+        <div style="display: flex; gap: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px; align-items: center;">
+          <button class="toolbar-btn" style="flex: 1;" onclick="closeDetailModal()">Đóng</button>
+          <button id="detail-btn-check" class="toolbar-btn" style="flex: 1.5; background: #0f172a; border-color: rgba(255, 255, 255, 0.15);" onclick="actionCheckCan()">🔍 CHECK CĂN</button>
+          <button id="detail-btn-lock" class="toolbar-btn primary" style="flex: 2; background: #ef4444; border-color: #ef4444;" onclick="actionLockCan()">🔒 LOCK CĂN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Screen Image Modal -->
+  <div id="image-fullscreen-modal" class="modal-overlay" onclick="closeFullScreenImage()" style="z-index: 10000; background: rgba(0,0,0,0.95);">
+    <img id="image-fullscreen" src="" style="max-width: 95%; max-height: 95%; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.8);" />
+  </div>
+
+  <!-- Load Local Leaflet JS Library -->
+  <script src="shared/leaflet.js"></script>
+
+  <!-- Load Project Data statically (prevents local CORS blocks and executes instantly) -->
+  <script src="projects/vinh-xanh/data.js"></script>
+  <script src="projects/global-gate-ha-long/data.js"></script>
+
+  <!-- Load Shared Custom Logic -->
+  <script src="shared/map-viewer.js?v=7"></script>
+
+</body>
+</html>
