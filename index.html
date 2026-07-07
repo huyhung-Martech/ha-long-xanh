@@ -103,7 +103,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    :root {
+:root {
       color-scheme: light !important;
       --color-primary: #169f72;
       --color-primary-dark: #0f6f4f;
@@ -920,6 +920,286 @@
       padding-top: 2px;
       padding-bottom: 4px;
     }
+
+/* ==========================================================================
+   SHARE BUTTON EXPAND ANIMATION (FORESTIA STYLE)
+   ========================================================================== */
+.share-btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.share-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 28px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #475569;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.share-btn:hover {
+  width: 145px;
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.share-btn .btn-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.share-btn:hover .btn-text {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+.social-icons-wrapper {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(110%);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.share-btn:hover .social-icons-wrapper {
+  transform: translateX(0);
+}
+
+.share-icon-item {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.share-icon-item:hover {
+  transform: scale(1.2);
+}
+
+.share-icon-item.fb:hover {
+  background-color: #1877F2;
+  color: #ffffff;
+}
+
+.share-icon-item.zalo {
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+.share-icon-item.zalo svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.share-icon-item.zalo:hover {
+  background-color: #0068FF;
+  color: #ffffff;
+}
+
+.share-icon-item.link:hover {
+  background-color: #169f72;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   SOCIAL FLIP BUTTON GROUP (FORESTIA STYLE)
+   ========================================================================== */
+.social-flip-btn-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+/* Animated Border Lines */
+.flip-border-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.flip-border-line {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 213, 174, 0.4), transparent);
+}
+
+.flip-border-line.top {
+    top: 0;
+    left: 0;
+    animation: moveLineRight 2.5s linear infinite;
+}
+
+.flip-border-line.bottom {
+    bottom: 0;
+    left: 0;
+    animation: moveLineLeft 2.5s linear infinite;
+}
+
+@keyframes moveLineRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes moveLineLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Social Nodes */
+.social-flip-node {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    perspective: 1000px;
+    cursor: pointer;
+    display: block;
+}
+
+.social-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-delay: calc(var(--index) * 0.08s);
+}
+
+/* Trigger flip when container is hovered */
+.social-flip-btn-group:hover .social-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.social-flip-front,
+.social-flip-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 850;
+    font-size: 14px;
+}
+
+.social-flip-front {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.social-flip-back {
+    transform: rotateY(180deg);
+    color: #ffffff;
+}
+
+.social-flip-back.hl-color {
+    background: #169f72;
+}
+
+.social-flip-back.zl-color {
+    background: #0068FF;
+}
+
+.social-flip-back.ms-color {
+    background: #ea4335;
+}
+
+.social-flip-back.tk-color {
+    background: #000000;
+}
+
+.social-flip-back.fb-color {
+    background: #1877F2;
+}
+
+.social-flip-back.yt-color {
+    background: #FF0000;
+}
+
+.social-flip-back.map-color {
+    background: #FFD5AE;
+    color: #0f172a;
+}
+
+/* Tooltip */
+.social-tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.8);
+    bottom: 46px;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.social-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #0f172a;
+}
+
+.social-flip-node:hover .social-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
 </style>
 </head>
 <body class="font-sans">
@@ -1058,10 +1338,26 @@
             <i class="bi bi-chevron-right text-[10px]"></i>
             <span class="text-slate-600">Chi tiết dự án</span>
           </nav>
-          <button @click="shareProject" class="flex items-center gap-1.5 hover:text-primary transition-colors font-bold bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-sm">
-            <i class="bi bi-share"></i>
-            Chia sẻ
-          </button>
+          <div class="share-btn-wrapper">
+            <button class="share-btn" id="share-btn" aria-label="Share page">
+              <span class="btn-text">
+                <i class="bi bi-share text-[10px]"></i> Chia sẻ
+              </span>
+              <span class="social-icons-wrapper">
+                <span class="share-icon-item fb" @click.stop="shareSocial('facebook')" title="Chia sẻ Facebook">
+                  <i class="bi bi-facebook"></i>
+                </span>
+                <span class="share-icon-item zalo" @click.stop="shareSocial('zalo')" title="Chia sẻ Zalo">
+                  <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current">
+                    <path d="M12 2C6.477 2 2 6.134 2 11.238c0 3.123 1.674 5.922 4.298 7.606-.118.847-.48 2.373-.556 2.709-.089.39.155.362.327.247.135-.09 2.146-1.455 3.013-2.066.862.242 1.79.376 2.718.376 5.523 0 10-4.134 10-9.238S17.523 2 12 2zm3.308 12.333c0 .247-.2.447-.447.447h-4.474v-1.118h2.641l-2.84-3.52c-.1-.13-.153-.294-.153-.464V8.455c0-.247.2-.447.447-.447h4.385v1.118H12.35l2.805 3.5c.105.132.153.295.153.463v1.247z" />
+                  </svg>
+                </span>
+                <span class="share-icon-item link" @click.stop="copyShareLink" title="Sao chép liên kết">
+                  <i class="bi bi-link-45deg text-sm"></i>
+                </span>
+              </span>
+            </button>
+          </div>
         </div>
 
         <!-- Project title summary box -->
@@ -1076,7 +1372,7 @@
               {{ project?.address || 'Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh' }}
             </p>
           </div>
-          <div class="text-[13px] font-bold text-slate-600 max-w-sm md:text-right leading-relaxed">
+          <div class="text-[13px] font-bold text-slate-600 max-w-lg md:text-right leading-relaxed">
             Theo dõi thông tin chi tiết về bảng giá, quỹ căn, mặt bằng, tiến độ và chính sách bán hàng dự án VINHOMES GLOBAL GATE HẠ LONG.
           </div>
         </div>
@@ -1471,32 +1767,27 @@
                         }"
                       >
                         <!-- Card Container -->
-                        <div class="w-full aspect-[4/5] rounded-2xl bg-white border border-slate-200 shadow-md p-5 flex flex-col justify-between select-none hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <div class="w-full aspect-[4/5] rounded-2xl bg-white border border-slate-200 shadow-md flex flex-col justify-between select-none hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
                           <!-- 3D Render Image Area -->
                           <div 
-                            class="flex-grow flex items-center justify-center relative h-[220px]"
+                            class="w-full flex-grow overflow-hidden bg-slate-50 relative"
                             @click.stop="activeFloorPlanIndex === pIdx ? openImage(plan.image) : (activeFloorPlanIndex = pIdx)"
                           >
                             <img 
                               :src="plan.image" 
                               :alt="plan.name" 
-                              class="w-auto h-full max-h-[200px] object-contain transition-transform duration-500 hover:scale-105"
+                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                               draggable="false"
                              loading="lazy">
                           </div>
 
                           <!-- Card Info Area -->
-                          <div class="px-2 pb-2 pt-4 border-t border-slate-100 flex flex-col space-y-1 text-left w-full">
+                          <div class="p-5 border-t border-slate-100 flex flex-col space-y-1 text-left w-full">
                             <span class="text-caption text-blue-600 font-bold">Căn {{ plan.code }}</span>
                             
                             <div class="text-[11px] flex items-center gap-1 mt-1 font-semibold text-slate-500">
                               <span>Diện tích:</span>
                               <span class="text-slate-800 font-black">{{ plan.area }}</span>
-                            </div>
-
-                            <div class="text-[11px] flex items-center gap-1 font-semibold text-slate-500">
-                              <span>Số căn:</span>
-                              <span class="text-slate-800 font-black">{{ plan.quantity }}</span>
                             </div>
                           </div>
                         </div>
@@ -1583,23 +1874,45 @@
                 <span class="text-xs font-medium text-slate-400">Tải tài liệu</span>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a 
-                  v-for="(doc, idx) in project?.link_general" 
-                  :key="idx"
-                  :href="doc.link_utility_url" 
-                  target="_blank"
-                  class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:border-primary hover:bg-white hover:shadow-sm transition-all"
-                >
-                  <div class="bg-blue-50 text-blue-500 p-2.5 rounded-lg border border-blue-100">
-                    <i class="bi bi-file-earmark-zip-fill text-lg"></i>
+              <div v-if="!project?.link_general || project.link_general.length === 0" class="flex flex-col items-center justify-center p-12 text-center bg-slate-50 rounded-2xl border border-slate-200/50">
+                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3 shadow-inner">
+                  <i class="bi bi-folder-symlink text-xl"></i>
+                </div>
+                <span class="block text-xs font-extrabold text-slate-700">Tài liệu đang được cập nhật</span>
+                <span class="block text-[10px] text-slate-400 mt-1 max-w-[280px]">Hệ thống đang chuẩn bị Sales Kit và tài liệu đào tạo chính thức của dự án.</span>
+              </div>
+              <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <template v-for="(doc, idx) in project?.link_general" :key="idx">
+                  <!-- Active Link Card -->
+                  <a 
+                    v-if="doc.link_utility_url"
+                    :href="doc.link_utility_url" 
+                    target="_blank"
+                    class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:border-primary hover:bg-white hover:shadow-sm transition-all"
+                  >
+                    <div class="bg-blue-50 text-blue-500 p-2.5 rounded-lg border border-blue-100">
+                      <i class="bi bi-file-earmark-zip-fill text-lg"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                      <span class="block text-xs font-extrabold text-slate-800 truncate">{{ doc.link_utility_name }}</span>
+                      <span class="block text-[10px] text-slate-400 mt-0.5">Google Drive Link</span>
+                    </div>
+                    <i class="bi bi-chevron-right text-slate-400"></i>
+                  </a>
+                  <!-- Disabled Placeholder Card -->
+                  <div 
+                    v-else
+                    class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl opacity-60 cursor-not-allowed select-none"
+                  >
+                    <div class="bg-slate-100 text-slate-400 p-2.5 rounded-lg border border-slate-200">
+                      <i class="bi bi-file-earmark-zip text-lg"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                      <span class="block text-xs font-extrabold text-slate-500 truncate">{{ doc.link_utility_name }}</span>
+                      <span class="block text-[10px] text-slate-400 mt-0.5">Chờ cập nhật link...</span>
+                    </div>
                   </div>
-                  <div class="flex-grow min-w-0">
-                    <span class="block text-xs font-extrabold text-slate-800 truncate">{{ doc.link_utility_name }}</span>
-                    <span class="block text-[10px] text-slate-400 mt-0.5">Google Drive Link</span>
-                  </div>
-                  <i class="bi bi-chevron-right text-slate-400"></i>
-                </a>
+                </template>
               </div>
             </div>
           </div>
@@ -1650,8 +1963,8 @@
           <div v-else-if="activeTab === 'building'" class="space-y-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
               <div class="border-b border-slate-200 pb-4">
-                <h2 class="text-h1 uppercase tracking-wide text-primary">Quy mô tòa nhà</h2>
-                <p class="text-caption text-slate-400 mt-1">Danh sách Block / Tòa nhà của dự án</p>
+                <h2 class="text-h1 uppercase tracking-wide text-primary">Phân khu</h2>
+                <p class="text-caption text-slate-400 mt-1">Danh sách phân khu của dự án</p>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -1683,7 +1996,7 @@
                       <!-- Header -->
                       <div class="flex items-center gap-1.5 text-caption text-slate-400">
                         <i class="bi bi-building"></i>
-                        <span>TÒA NHÀ</span>
+                        <span>PHÂN KHU</span>
                       </div>
                       <h5 class="text-h2 text-primary uppercase mt-1">{{ sub.name }}</h5>
                     </div>
@@ -1738,7 +2051,7 @@
                   :key="s.id"
                   @click="activeSubdivisionId = s.id"
                   :class="[
-                    'p-4 border rounded-2xl text-left outline-none transition-all duration-200 hover:scale-[1.02] flex flex-col justify-between h-20 shadow-sm',
+                    'p-4 border rounded-2xl text-left outline-none transition-all duration-200 hover:scale-[1.02] flex flex-col justify-between min-h-[80px] shadow-sm',
                     activeSubdivisionId === s.id 
                       ? 'bg-[#169f72] border-[#169f72] text-white' 
                       : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
@@ -1750,9 +2063,6 @@
                   </div>
                   <div class="mt-1">
                     <span class="block text-xs font-black" :class="activeSubdivisionId === s.id ? 'text-white' : 'text-slate-800'">{{ s?.name }}</span>
-                    <span class="block text-[9px] font-semibold mt-0.5" :class="activeSubdivisionId === s.id ? 'text-slate-300' : 'text-slate-400'">
-                      {{ s.floorCount || 35 }} tầng
-                    </span>
                   </div>
                 </button>
               </div>
@@ -1769,16 +2079,32 @@
                     <p class="text-caption mt-1">Chọn tầng để kiểm tra giỏ hàng còn lại và vị trí các căn hộ.</p>
                   </div>
                   
-                  <!-- Floor select dropdown -->
-                  <div class="flex items-center gap-2 self-end sm:self-auto">
-                    <label class="text-xs font-bold text-slate-500">Tầng:</label>
-                    <select 
-                      v-model="selectedFloor" 
-                      class="bg-slate-50 border border-slate-200 rounded-lg py-1.5 px-3 text-xs font-bold focus:outline-none focus:border-primary text-slate-700 cursor-pointer"
-                    >
-                      <option value="all">Tất cả tầng</option>
-                      <option v-for="f in availableFloors" :key="f" :value="f">Tầng {{ f }}</option>
-                    </select>
+                  <div class="flex flex-wrap items-center gap-4 self-end sm:self-auto">
+                    <!-- View Mode Toggle -->
+                    <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+                      <button 
+                        @click="inventoryViewMode = 'table'"
+                        type="button"
+                        :class="[
+                          'px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1.5 outline-none',
+                          inventoryViewMode === 'table' ? 'bg-[#169f72] text-white shadow-sm' : 'text-slate-550 hover:text-slate-700'
+                        ]"
+                      >
+                        <i class="bi bi-table text-xs"></i>
+                        <span>Dạng bảng</span>
+                      </button>
+                      <button 
+                        @click="inventoryViewMode = 'grid'"
+                        type="button"
+                        :class="[
+                          'px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1.5 outline-none',
+                          inventoryViewMode === 'grid' ? 'bg-[#169f72] text-white shadow-sm' : 'text-slate-550 hover:text-slate-700'
+                        ]"
+                      >
+                        <i class="bi bi-grid-3x3-gap-fill text-xs"></i>
+                        <span>Dạng lưới</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -1856,7 +2182,7 @@
                   </div>
 
                   <!-- Table View -->
-                  <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
+                  <div v-if="inventoryViewMode === 'table'" class="overflow-x-auto border border-slate-200 rounded-xl shadow-sm">
                     <table class="w-full text-xs text-left border-collapse bg-white min-w-[900px]">
                       <thead>
                         <tr class="border-b border-slate-200 text-slate-400 font-extrabold uppercase bg-slate-50">
@@ -2400,7 +2726,8 @@
               </h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <a 
-                  href="https://drive.google.com/drive/folders/14-yjJjeV6KfjtCzMBQQ7R6AGEjARND0j" 
+                  v-if="project?.link_general?.find(doc => doc.link_utility_name.includes('CSBH'))"
+                  :href="project?.link_general?.find(doc => doc.link_utility_name.includes('CSBH'))?.link_utility_url" 
                   target="_blank"
                   class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:border-primary hover:bg-white hover:shadow-sm transition-all"
                 >
@@ -2413,6 +2740,18 @@
                   </div>
                   <i class="bi bi-chevron-right text-slate-400"></i>
                 </a>
+                <div 
+                  v-else
+                  class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl opacity-60 cursor-not-allowed select-none"
+                >
+                  <div class="bg-slate-100 text-slate-400 p-2.5 rounded-lg border border-slate-200">
+                    <i class="bi bi-file-earmark-pdf text-lg"></i>
+                  </div>
+                  <div class="flex-grow min-w-0">
+                    <span class="block text-xs font-extrabold text-slate-550 truncate">Văn Bản CSBH Chính Thức</span>
+                    <span class="block text-[10px] text-slate-400 mt-0.5">Chờ cập nhật chính thức...</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3742,6 +4081,80 @@
           <p class="text-sm leading-relaxed mb-4">
             Nền tảng hỗ trợ đại lý và khách hàng tiếp cận trực tuyến quỹ căn bất động sản cao cấp Vinhomes Global Gate Hạ Long nhanh chóng, minh bạch và chuyên nghiệp.
           </p>
+          <div class="social-flip-btn-group">
+            <!-- Animated Border Lines -->
+            <div class="flip-border-lines">
+              <div class="flip-border-line top"></div>
+              <div class="flip-border-line bottom"></div>
+            </div>
+            
+            <!-- C: Hotline -->
+            <a href="tel:0372609495" class="social-flip-node" aria-label="Hotline" style="--index: 0;">
+              <span class="social-tooltip">Hotline: 0372.609.495</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">C</div>
+                <div class="social-flip-back hl-color"><i class="bi bi-telephone-fill"></i></div>
+              </div>
+            </a>
+            
+            <!-- O: Zalo -->
+            <a href="https://zalo.me/0372609495" target="_blank" rel="noopener noreferrer" class="social-flip-node" aria-label="Zalo" style="--index: 1;">
+              <span class="social-tooltip">Zalo Chat</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">O</div>
+                <div class="social-flip-back zl-color">
+                  <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px; display: block;">
+                    <path d="M12 2C6.477 2 2 6.134 2 11.238c0 3.123 1.674 5.922 4.298 7.606-.118.847-.48 2.373-.556 2.709-.089.39.155.362.327.247.135-.09 2.146-1.455 3.013-2.066.862.242 1.79.376 2.718.376 5.523 0 10-4.134 10-9.238S17.523 2 12 2zm3.308 12.333c0 .247-.2.447-.447.447h-4.474v-1.118h2.641l-2.84-3.52c-.1-.13-.153-.294-.153-.464V8.455c0-.247.2-.447.447-.447h4.385v1.118H12.35l2.805 3.5c.105.132.153.295.153.463v1.247z" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+            
+            <!-- N: Email -->
+            <a href="mailto:minhphuong.queenland@gmail.com" class="social-flip-node" aria-label="Email" style="--index: 2;">
+              <span class="social-tooltip">Email: minhphuong.queenland@gmail.com</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">N</div>
+                <div class="social-flip-back ms-color"><i class="bi bi-envelope-fill"></i></div>
+              </div>
+            </a>
+            
+            <!-- T: Facebook Page -->
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-flip-node" aria-label="Facebook" style="--index: 3;">
+              <span class="social-tooltip">Facebook Page</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">T</div>
+                <div class="social-flip-back fb-color"><i class="bi bi-facebook"></i></div>
+              </div>
+            </a>
+            
+            <!-- A: Zalo Group -->
+            <a href="https://zalo.me/0372609495" target="_blank" rel="noopener noreferrer" class="social-flip-node" aria-label="Zalo Group" style="--index: 4;">
+              <span class="social-tooltip">Quỹ căn Zalo Group</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">A</div>
+                <div class="social-flip-back zl-color"><i class="bi bi-people-fill"></i></div>
+              </div>
+            </a>
+            
+            <!-- C: Youtube -->
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="social-flip-node" aria-label="Youtube" style="--index: 5;">
+              <span class="social-tooltip">YouTube Channel</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">C</div>
+                <div class="social-flip-back yt-color"><i class="bi bi-youtube"></i></div>
+              </div>
+            </a>
+            
+            <!-- T: Map -->
+            <a href="#overview" class="social-flip-node" aria-label="Bản đồ" style="--index: 6;">
+              <span class="social-tooltip">Vị Trí Bản Đồ</span>
+              <div class="social-flip-inner">
+                <div class="social-flip-front">T</div>
+                <div class="social-flip-back map-color"><i class="bi bi-geo-alt-fill"></i></div>
+              </div>
+            </a>
+          </div>
         </div>
         <div>
           <h3 class="text-white font-bold text-lg mb-4">Liên Kết Nhanh</h3>
@@ -3926,7 +4339,7 @@
   <!-- Bọc dữ liệu nhúng tĩnh vào window object -->
   <script>
     window.__VGGHL_DATA__ = {
-      project: {"id":1334,"projectId":1334,"code":"VGGHL","name":"VINHOMES GLOBAL GATE HẠ LONG","slogan":"Hạ Long Xanh - Thành phố kỳ quan kết nối toàn cầu bên Vịnh Di Sản","address":"Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh","investor":"VINHOMES","totalArea":"6.220 ha","totalInvestment":"456.639 tỷ đồng (gần 18 tỷ USD)","populationScale":"Khoảng 380.000 người","productTypes":"Biệt thự, khách sạn, shophouse, căn hộ","startDate":"19/12/2025","project_type":"low_rise","ownership_type":"Sở hữu lâu dài","image_360":"https://kuula.co/share/LGKDq?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&zoom=1","iframeLocation":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","locationHtml":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long không chỉ là nơi an cư mà còn là “trạm trung chuyển giá trị” của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối siêu tốc qua tuyến đường sắt cao tốc, mở rộng cơ hội làm việc – kinh doanh liên vùng, đón dòng khách thủ đô đổ về cuối tuần.</p><p>🚗<strong> 30 phút tới Hải Phòng</strong>: Liên kết nhanh với trung tâm công nghiệp – cảng biển lớn nhất miền Bắc, gia tăng tiềm năng khai thác thương mại và logistics.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/sân bay quốc tế Cát Bi (Hải Phòng): </strong>Đón trọn dòng khách quốc tế, thúc đẩy kinh doanh lưu trú – dịch vụ – du lịch cao cấp.</p><p>🌍 <strong>2 giờ tới Móng Cái:</strong> Chạm cửa khẩu quốc tế, mở rộng giao thương xuyên biên giới – đòn bẩy tăng trưởng dài hạn.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Tạo thành trục du lịch - đô thị ven biển sầm uất tại Quảng Ninh.<strong></strong></p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển qua cao tốc Hà Nội - Hạ Long kết nối trực tiếp tới thủ đô.</p><p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n</p>","iframe_location":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","location_html":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long không chỉ là nơi an cư mà còn là “trạm trung chuyển giá trị” của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối siêu tốc qua tuyến đường sắt cao tốc, mở rộng cơ hội làm việc – kinh doanh liên vùng, đón dòng khách thủ đô đổ về cuối tuần.</p><p>🚗<strong> 30 phút tới Hải Phòng</strong>: Liên kết nhanh với trung tâm công nghiệp – cảng biển lớn nhất miền Bắc, gia tăng tiềm năng khai thác thương mại và logistics.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/sân bay quốc tế Cát Bi (Hải Phòng): </strong>Đón trọn dòng khách quốc tế, thúc đẩy kinh doanh lưu trú – dịch vụ – du lịch cao cấp.</p><p>🌍 <strong>2 giờ tới Móng Cái:</strong> Chạm cửa khẩu quốc tế, mở rộng giao thương xuyên biên giới – đòn bẩy tăng trưởng dài hạn.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Tạo thành trục du lịch - đô thị ven biển sầm uất tại Quảng Ninh.<strong></strong></p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển qua cao tốc Hà Nội - Hạ Long kết nối trực tiếp tới thủ đô.</p><p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n</p>","link_general":[{"link_utility_name":"CSBH","link_utility_url":"https://drive.google.com/drive/folders/1hJEJqStEN9QhyZsTieI6JqQBEBy-KY5L?usp=drive_link"},{"link_utility_name":"Layout Thiết Kế","link_utility_url":"https://drive.google.com/drive/folders/1yE5LEFaEZ9Jtw3EfAxGHWqsNevqJpCwE?usp=drive_link"},{"link_utility_name":"Phối Cảnh","link_utility_url":"https://drive.google.com/drive/folders/1Xi2L0efDOcCBrn5HpPqtkTUbU-utXTYz?usp=drive_link"},{"link_utility_name":"Slide Đào Tạo","link_utility_url":"https://drive.google.com/drive/folders/1lgWZdBuutqeXgbfOx7CkJnEzsJNa6jpv?usp=drive_link"},{"link_utility_name":"Tiện Ích","link_utility_url":"https://drive.google.com/drive/folders/1vmuLNr9XsMLIlfGQNooRdn2tRt_Rt1tr?usp=drive_link"},{"link_utility_name":"Tổng Mặt Bằng","link_utility_url":"https://drive.google.com/drive/folders/1tkDnglUKNmK7dONxS22dSBnnECiG53Dm?usp=drive_link"},{"link_utility_name":"Video","link_utility_url":"https://drive.google.com/drive/folders/1iGmBm-11CaDednMFI0SsmUxYlwX3lt1V?usp=drive_link"}],"avatar_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65","image_data":[{"image_coordinate_code":"avaVTD","image_coordinate_name":"avaVTD","image_data":[{"image_name":"avaVTD.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/avaVTD.jpg_4aeed9f3d439c7ed748af33678437c24bae56197"}]},{"image_coordinate_code":"hlx1","image_coordinate_name":"hlx1","image_data":[{"image_name":"01.Cam tổng.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65"}]}],"typicalLayouts":[{"name":"MẶT BẰNG TỔNG THỂ","image":"images/masterplan_tongquan.jpg"},{"name":"MẶT BẰNG PHÂN KHU VỊNH THIÊN ĐƯỜNG","image":"images/masterplan_vinhthienduong.jpg"}],"utilities":[{"name":"CÔNG VIÊN RỪNG GLOBE HẠ LONG","image":"images/utilities/cong-vien-rung-globe-ha-long.jpg"},{"name":"TOD GA DEPOT & OUTLET","image":"images/utilities/tod-ga-depot-outlet.jpg"},{"name":"QUẦN THỂ 12 SÂN GOLF","image":"images/utilities/quan-the-12-san-golf.jpg"},{"name":"CÔNG VIÊN VCGT VINWONDERS","image":"images/utilities/cong-vien-vcgt-vinwonders.jpg"},{"name":"THÁP VĂN PHÒNG WONDER TOWER","image":"images/utilities/thap-van-phong-wonder-tower.jpg"},{"name":"NHÀ HÁT WONDER THEATER","image":"images/utilities/nha-hat-wonder-theater.jpg"},{"name":"RỪNG NGẬP MẶN WONDER MANGROVE","image":"images/utilities/rung-ngap-man-wonder-mangrove.jpg"},{"name":"HỆ THỐNG KHÁCH SẠN, RESORT & SÒNG BẠC HOÀNG GIA CASINO ROYAL BAY","image":"images/utilities/he-thong-khach-san-resort-song-bac-hoang-gia-casino-royal-bay.jpg"},{"name":"CÔNG VIÊN NỘI KHU","image":"images/utilities/cong-vien-noi-khu.jpg"},{"name":"BIỂN LAGOON","image":"images/utilities/bien-lagoon.jpg"}],"floorPlans":[{"code":"LK","name":"Liền kề sinh thái","area":"75 - 90 m²","quantity":"4 tầng","image":"images/utilities/lien-ke.jpg"},{"code":"SH","name":"Dinh thự","area":"90 - 120 m²","quantity":"4 tầng + 1 tum","image":"images/utilities/dinh-thu.jpg"},{"code":"BT-SL","name":"Biệt thự Song lập","area":"150 - 220 m²","quantity":"3 tầng + 1 tum","image":"images/utilities/biet-thu-song-lap.jpg"},{"code":"BT-DL","name":"Biệt thự Đơn lập","area":"250 - 450 m²","quantity":"3 tầng","image":"images/utilities/biet-thu-don-lap.jpg"}],"contactAdvisors":[{"name":"GĐDA-Mr. Hùng Trần","phone":"0372609495"},{"name":"Admin dự án-Ms. Minh Phương","phone":"0372609495"}],"introText":"Vinhomes Global Gate Hạ Long – siêu đô thị sinh thái đẳng cấp hàng đầu miền Bắc, được phát triển bởi Tập đoàn Vingroup, mang đến chuẩn sống xanh – thông minh – nghỉ dưỡng ngay giữa trung tâm vùng kinh tế trọng điểm Quảng Ninh – Hải Phòng. Dự án diện tích 6.206ha, tổng dự án 18 tỷ USD, tọa lạc tại khu vực Hạ Long – Quảng Yên, sở hữu kết nối chiến lược đến trung tâm Hạ Long, Hải Phòng và các khu công nghiệp lớn. Với quy hoạch đồng bộ hàng nghìn hecta, Vinhomes Hạ Long Xanh không chỉ mang lại môi trường an cư lý tưởng mà còn mở ra cơ hội đầu tư giàu tiềm năng trong những năm tới.","overviewImage":"images/intro_banner.jpg","sliderImages":["images/intro_banner.jpg","images/slider_1.jpg","images/slider_2.jpg","images/slider_3.jpg","images/slider_4.jpg"]}
+      project: {"id":1334,"projectId":1334,"code":"VGGHL","name":"VINHOMES GLOBAL GATE HẠ LONG","slogan":"Hạ Long Xanh - Thành phố kỳ quan kết nối toàn cầu bên Vịnh Di Sản","address":"Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh","investor":"VINHOMES","totalArea":"6.220 ha","totalInvestment":"456.639 tỷ đồng (gần 18 tỷ USD)","populationScale":"Khoảng 380.000 người","productTypes":"Biệt thự, khách sạn, shophouse, căn hộ","startDate":"19/12/2025","project_type":"low_rise","ownership_type":"Sở hữu lâu dài","image_360":"https://kuula.co/share/LGKDq?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1&zoom=1","iframeLocation":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","locationHtml":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long là \"trạm trung chuyển giá trị\" của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối nhanh chóng qua đường sắt cao tốc.</p><p>🚗<strong> 30 phút tới Hải Phòng: </strong>Liên kết nhanh với cảng biển lớn nhất miền Bắc.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/Cát Bi: </strong>Đón trọn dòng khách quốc tế.</p><p>🌍 <strong>2 giờ tới Móng Cái: </strong>Kết nối cửa khẩu giao thương biên giới.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Liên kết trục du lịch ven biển sầm uất.</p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển nhanh qua cao tốc Hà Nội - Hạ Long.</p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n","iframe_location":"<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24177.699808826746!2d106.89806102708023!3d20.930432367609452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5f6059cf5a3d%3A0xdbb61ed5c0c3550d!2zSOG6oSBMb25nIFhhbmggUXXhuqNuZyBZw6pu!5e1!3m2!1svi!2s!4v1775708882051!5m2!1svi!2s\" width=\"100%\" height=\"600\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>","location_html":"<p><img src=\"images/location_map.jpg\" class=\"img img-fluid o_we_custom_image\"></p><p><span style=\"font-size: 14px;\"><strong>VỊ TRÍ KẾT NỐI ĐA CỰC – TÂM ĐIỂM GIAO THƯƠNG MỚI</strong></span></p><p>Sở hữu tọa độ chiến lược hiếm có, Vinhomes Global Gate Hạ Long là \"trạm trung chuyển giá trị\" của toàn khu vực phía Bắc.</p><p>🚄<strong> 23 phút tới Hà Nội: </strong>Kết nối nhanh chóng qua đường sắt cao tốc.</p><p>🚗<strong> 30 phút tới Hải Phòng: </strong>Liên kết nhanh với cảng biển lớn nhất miền Bắc.</p><p>✈️<strong> 45 phút tới sân bay Vân Đồn/Cát Bi: </strong>Đón trọn dòng khách quốc tế.</p><p>🌍 <strong>2 giờ tới Móng Cái: </strong>Kết nối cửa khẩu giao thương biên giới.</p><p>🚗 <strong>25 phút tới Đảo Tuần Châu: </strong>Liên kết trục du lịch ven biển sầm uất.</p><p>🚀 <strong>2 giờ tới Hà Nội: </strong>Di chuyển nhanh qua cao tốc Hà Nội - Hạ Long.</p>\nBao quanh là hệ sinh thái du lịch triệu đô: Hạ Long – Tuần Châu – Cát Bà… tạo nên dòng tiền bền vững quanh năm\n\n","shortDescriptionSalePolicy":"images/sales_policy.jpg","short_description_sale_policy":"images/sales_policy.jpg","link_general":[{"link_utility_name":"CSBH","link_utility_url":""},{"link_utility_name":"Layout Thiết Kế","link_utility_url":""},{"link_utility_name":"Phối Cảnh","link_utility_url":""},{"link_utility_name":"Slide Đào Tạo","link_utility_url":""},{"link_utility_name":"Tiện Ích","link_utility_url":""},{"link_utility_name":"Tổng Mặt Bằng","link_utility_url":""},{"link_utility_name":"Video","link_utility_url":""}],"avatar_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65","image_data":[{"image_coordinate_code":"avaVTD","image_coordinate_name":"avaVTD","image_data":[{"image_name":"avaVTD.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/avaVTD.jpg_4aeed9f3d439c7ed748af33678437c24bae56197"}]},{"image_coordinate_code":"hlx1","image_coordinate_name":"hlx1","image_data":[{"image_name":"01.Cam tổng.jpg","image_url":"https://s3-hfx03.fptcloud.com/admin-bds/odoo/01.Cam_tổng.jpg_44eb2c134d1f60dba24f9f598450237a33d7ca65"}]}],"typicalLayouts":[{"name":"MẶT BẰNG TỔNG THỂ","image":"images/masterplan_tongquan.jpg"},{"name":"MẶT BẰNG PHÂN KHU VỊNH THIÊN ĐƯỜNG","image":"images/masterplan_vinhthienduong.jpg"}],"utilities":[{"name":"CÔNG VIÊN RỪNG GLOBE HẠ LONG","image":"images/utilities/cong-vien-rung-globe-ha-long.jpg"},{"name":"TOD GA DEPOT & OUTLET","image":"images/utilities/tod-ga-depot-outlet.jpg"},{"name":"QUẦN THỂ 12 SÂN GOLF","image":"images/utilities/quan-the-12-san-golf.jpg"},{"name":"CÔNG VIÊN VCGT VINWONDERS","image":"images/utilities/cong-vien-vcgt-vinwonders.jpg"},{"name":"THÁP VĂN PHÒNG WONDER TOWER","image":"images/utilities/thap-van-phong-wonder-tower.jpg"},{"name":"NHÀ HÁT WONDER THEATER","image":"images/utilities/nha-hat-wonder-theater.jpg"},{"name":"RỪNG NGẬP MẶN WONDER MANGROVE","image":"images/utilities/rung-ngap-man-wonder-mangrove.jpg"},{"name":"HỆ THỐNG KHÁCH SẠN, RESORT & SÒNG BẠC HOÀNG GIA CASINO ROYAL BAY","image":"images/utilities/he-thong-khach-san-resort-song-bac-hoang-gia-casino-royal-bay.jpg"},{"name":"CÔNG VIÊN NỘI KHU","image":"images/utilities/cong-vien-noi-khu.jpg"},{"name":"BIỂN LAGOON","image":"images/utilities/bien-lagoon.jpg"}],"floorPlans":[{"code":"LIỀN KỀ","name":"Liền kề sinh thái","area":"60 - 96 m²","quantity":"4 tầng","image":"images/utilities/lien-ke.jpg"},{"code":"DINH THỰ","name":"Dinh thự","area":"1028 m²","quantity":"4 tầng + 1 tum","image":"images/utilities/dinh-thu.jpg"},{"code":"BIỆT THỰ SONG LẬP","name":"Biệt thự Song lập","area":"162 m²","quantity":"3 tầng + 1 tum","image":"images/utilities/biet-thu-song-lap.jpg"},{"code":"BIỆT THỰ ĐƠN LẬP","name":"Biệt thự Đơn lập","area":"316.5 m²","quantity":"3 tầng","image":"images/utilities/biet-thu-don-lap.jpg"}],"contactAdvisors":[{"name":"GĐDA-Mr. Hùng Trần","phone":"0372609495"},{"name":"Admin dự án-Ms. Minh Phương","phone":"0372609495"}],"introText":"Vinhomes Global Gate Hạ Long – siêu đô thị sinh thái đẳng cấp hàng đầu miền Bắc, được phát triển bởi Tập đoàn Vingroup, mang đến chuẩn sống xanh – thông minh – nghỉ dưỡng ngay giữa trung tâm vùng kinh tế trọng điểm Quảng Ninh – Hải Phòng. Dự án diện tích 6.206ha, tổng dự án 18 tỷ USD, tọa lạc tại khu vực Hạ Long – Quảng Yên, sở hữu kết nối chiến lược đến trung tâm Hạ Long, Hải Phòng và các khu công nghiệp lớn. Với quy hoạch đồng bộ hàng nghìn hecta, Vinhomes Hạ Long Xanh không chỉ mang lại môi trường an cư lý tưởng mà còn mở ra cơ hội đầu tư giàu tiềm năng trong những năm tới.","overviewImage":"images/intro_banner.jpg","sliderImages":["images/intro_banner.jpg","images/slider_1.jpg","images/slider_2.jpg","images/slider_3.jpg","images/slider_4.jpg"]}
     };
     window.__SUBDIVISIONS__ = [{"id":1001,"projectId":1334,"name":"PHÂN KHU VỊNH BÌNH MINH","floorCount":4,"image":"images/masterplan_vinhthienduong.jpg"},{"id":1002,"projectId":1334,"name":"PHÂN KHU THIÊN ĐƯỜNG NHIỆT ĐỚI","floorCount":4,"image":"images/masterplan_vinhthienduong.jpg"}]
     window.__DIRECTION_MAP__ = {"BM34-73":"Tây Nam","BM25-54":"Chính Bắc","BM79-11":"Đông Nam","BM73-38":"Đông Bắc","BM69-19":"Tây Bắc","BM65-08":"Chính Đông","BM60-23":"Tây Bắc","TĐ2-38":"Tây Nam","BM25-07":"Chính Tây","BM87-06":"Chính Nam","BM87-10":"Tây Nam"}
@@ -3938,7 +4351,7 @@
 
   <!-- Script điều khiển Vue -->
   <script>
-    const { createApp, ref, computed, watch, onMounted, onUnmounted } = Vue;
+const { createApp, ref, computed, watch, onMounted, onUnmounted } = Vue;
 
     // Component AnimatedNumber phong cách VengeanceUI
     const AnimatedNumber = {
@@ -4087,7 +4500,7 @@
         const selectedProduct = ref(null);
         const lockNote = ref('');
         const showLockConfirmModal = ref(false);
-        const inventoryViewMode = ref('grid');
+        const inventoryViewMode = ref('table');
         const isLoadingInventory = ref(true);
 
         const compareProducts = ref([]);
@@ -4443,7 +4856,7 @@
           { id: 'location', name: 'Vị trí dự án', icon: 'bi-geo-alt-fill', iconColor: 'text-[#169f72]' },
           { id: 'training', name: 'Tài liệu đào tạo', icon: 'bi-mortarboard-fill', iconColor: 'text-[#169f72]' },
           { id: 'inventory', name: 'Mặt bằng căn hộ', icon: 'bi-grid-3x3-gap-fill', iconColor: 'text-[#169f72]' },
-          { id: 'building', name: 'Quy mô tòa nhà', icon: 'bi-buildings-fill', iconColor: 'text-[#169f72]' },
+          { id: 'building', name: 'Phân khu', icon: 'bi-buildings-fill', iconColor: 'text-[#169f72]' },
           { id: 'compare', name: 'So sánh căn hộ', icon: 'bi-table', iconColor: 'text-[#169f72]' },
           { id: 'policy', name: 'Chính sách bán hàng', icon: 'bi-file-earmark-text-fill', iconColor: 'text-[#169f72]' },
           { id: 'tour360', name: 'Virtual Tour 360°', icon: 'bi-camera-fill', iconColor: 'text-[#169f72]' },
@@ -4603,7 +5016,7 @@
         // Lấy tên subdivision
         function getSubdivisionName(subId) {
           const sub = subdivisions.value.find(s => s.id === subId);
-          return sub ? sub?.name : 'Tòa nhà';
+          return sub ? sub?.name : 'Phân khu';
         }
 
         // Đăng nhập giả lập
@@ -4721,12 +5134,25 @@
           return activeTimers.value[productId] || '00:00';
         }
 
-        function shareProject() {
+        function shareSocial(platform) {
+          const url = encodeURIComponent(window.location.href);
+          if (platform === 'facebook') {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+          } else if (platform === 'zalo') {
+            window.open(`https://sp.zalo.me/share_inline?utm_source=zalo&utm_medium=zalo&utm_campaign=zalo&url=${url}`, '_blank', 'width=600,height=400');
+          }
+        }
+
+        function copyShareLink() {
           navigator.clipboard.writeText(window.location.href).then(() => {
             alert('Đã sao chép liên kết landing page vào Clipboard!');
           }).catch(err => {
             console.error('Lỗi khi sao chép: ', err);
           });
+        }
+
+        function shareProject() {
+          copyShareLink();
         }
 
         function resetLightboxZoom() {
@@ -5210,6 +5636,8 @@
           getSubdivisionIdByName,
           getSubdivisionIdByName,
           shareProject,
+          shareSocial,
+          copyShareLink,
           openImage,
           compareProducts,
           isProductSelectedForCompare,
@@ -5350,7 +5778,7 @@
         }
       }
     }).mount('#app');
-  </script>
+</script>
 
 </body>
 </html>

@@ -15,8 +15,8 @@ const projectMetadata = {
   'global-gate-ha-long': {
     title: 'Vinhomes Global Gate',
     subtitle: 'Vinhomes Global Gate Hạ Long - Bản đồ tương tác',
-    center: [-100, 100],
-    zoom: 2,
+    center: [-142, 95],
+    zoom: 3,
     maxNativeZoom: 7,
     variableName: 'globalGateData',
     getData: () => typeof globalGateData !== 'undefined' ? globalGateData : null
