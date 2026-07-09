@@ -114,7 +114,7 @@
       --color-border: #e2e8f0;
 
       /* Carousel variables */
-      --slide-width: 280px;
+      --slide-width: 310px;
       --carousel-rotate-y: 35deg;
       --carousel-scale: 0.82;
       --carousel-opacity: 0.5;
@@ -122,7 +122,7 @@
     }
     @media (max-width: 767px) {
       :root {
-        --slide-width: 240px;
+        --slide-width: 265px;
         --carousel-rotate-y: 0deg; /* Tắt xoay 3D trên mobile để ảnh sắc nét, không bị nhòe */
         --carousel-scale: 0.88;
         --carousel-opacity: 0.6;
@@ -1742,14 +1742,14 @@
                   <p class="text-caption mt-1">Đa dạng lựa chọn cho mọi nhu cầu (Bấm thẻ hoặc nút điều hướng để chuyển căn)</p>
                 </div>
 
-                <!-- Perspective 3D Viewport Container -->
+                 <!-- Perspective 3D Viewport Container -->
                 <div 
-                  class="relative isolate h-[410px] md:h-[520px] w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
+                  class="relative isolate h-[440px] md:h-[520px] w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
                   style="perspective: 1200px;"
                 >
                   <!-- Inner Perspective Track of Slides -->
                   <div 
-                    class="absolute left-1/2 top-[44%] flex w-fit -translate-y-1/2 items-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    class="absolute left-1/2 top-[42%] md:top-[44%] flex w-fit -translate-y-1/2 items-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     :style="{ transform: `translateY(-50%) translateX(calc(-1 * (${ activeFloorPlanIndex } * var(--slide-width) + var(--slide-width) / 2)))` }"
                   >
                     <div 
