@@ -4720,11 +4720,23 @@ const { createApp, ref, computed, watch, onMounted, onUnmounted } = Vue;
             return;
           }
 
-          const csvUrl = 'https://docs.google.com/spreadsheets/d/1qV3tQ_KG5bd3ZCHPvVUgHkeL2ofrAL7k/export?format=csv&gid=1450337330';
+          const csvUrl = 'https://docs.google.com/spreadsheets/d/1G_YuvJGvJ8DS8ROe3zEfe2a8bd6AbocwYwOwx3gOM-E/export?format=csv&gid=609776019';
           
           Papa.parse(csvUrl, {
             download: true,
             complete: function(results) {
+              if (!results || !results.data || results.data.length === 0 || !results.data[0] || results.data[0][0] !== 'STT') {
+                console.error("Lỗi tải dữ liệu hoặc dữ liệu không đúng định dạng. Sử dụng dữ liệu fallback.");
+                allProducts.value = window.__FALLBACK_PRODUCTS__ || [];
+                isLoadingInventory.value = false;
+                if (subdivisions.value.length > 0) {
+                  const firstWithProducts = subdivisions.value.find(s => 
+                    allProducts.value.some(p => p.subdivisionId === s.id)
+                  );
+                  activeSubdivisionId.value = firstWithProducts ? firstWithProducts.id : subdivisions.value[0].id;
+                }
+                return;
+              }
               const rows = results.data;
               const subdivisionsMap = {};
               window.__SUBDIVISIONS__.forEach(sub => {
