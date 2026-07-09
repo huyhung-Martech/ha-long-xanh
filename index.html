@@ -1733,7 +1733,7 @@
               </div>
 
               <!-- Carousel Thiết Kế Căn Hộ (Mặt bằng căn 3D thật) - PERSPECTIVE CAROUSEL -->
-              <div v-if="project?.floorPlans && project?.floorPlans.length > 0" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div v-if="project?.floorPlans && project?.floorPlans.length > 0" class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                 <div class="text-center space-y-2 flex flex-col items-center justify-center">
                   <h4 class="text-h1 uppercase tracking-wide text-primary">
                     Sản phẩm
@@ -1744,7 +1744,7 @@
 
                 <!-- Perspective 3D Viewport Container -->
                 <div 
-                  class="relative isolate h-[520px] w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
+                  class="relative isolate h-[410px] md:h-[520px] w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
                   style="perspective: 1200px;"
                 >
                   <!-- Inner Perspective Track of Slides -->
@@ -4074,8 +4074,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 mt-auto" style="padding-top: 40px; padding-bottom: 0;">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 mt-auto pt-6 md:pt-10 pb-0">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-5 md:gap-8">
         <div>
           <h3 class="text-white font-bold text-lg mb-4">SALEHUB.DEV</h3>
           <p class="text-sm leading-relaxed mb-4">
@@ -4184,7 +4184,7 @@
         </div>
       </div>
       <!-- Copyright block for both desktop and mobile -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-center" style="margin-top: 40px; padding-top: 24px; padding-bottom: 24px;">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-center mt-6 md:mt-10 py-4 md:py-6">
         <span class="text-xs text-slate-500 block">
           @2026 Bản quyền thuộc về Salehub.dev - Một sản phẩm của Queen Land Group.
         </span>
