@@ -138,6 +138,24 @@
       will-change: transform, opacity;
     }
 
+    .perspective-viewport {
+      height: 440px;
+    }
+    @media (min-width: 768px) {
+      .perspective-viewport {
+        height: 520px;
+      }
+    }
+    .perspective-track {
+      top: 42%;
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 768px) {
+      .perspective-track {
+        top: 44%;
+      }
+    }
+
     img {
       color-scheme: light !important;
       filter: none !important;
@@ -1746,12 +1764,12 @@
 
                  <!-- Perspective 3D Viewport Container -->
                 <div 
-                  class="relative isolate h-[440px] md:h-[520px] w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
+                  class="relative isolate perspective-viewport w-full overflow-hidden bg-slate-50 rounded-2xl border border-slate-200/80 shadow-inner select-none"
                   style="perspective: 1200px;"
                 >
                   <!-- Inner Perspective Track of Slides -->
                   <div 
-                    class="absolute left-1/2 top-[42%] md:top-[44%] flex w-fit -translate-y-1/2 items-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    class="absolute left-1/2 perspective-track flex w-fit -translate-y-1/2 items-center transition-all duration-700"
                     :style="{ transform: `translateY(-50%) translateX(calc(-1 * (${ activeFloorPlanIndex } * var(--slide-width) + var(--slide-width) / 2)))` }"
                   >
                     <div 
