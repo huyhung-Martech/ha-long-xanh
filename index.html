@@ -79,7 +79,7 @@
   }
   </script>
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://s3-hfx03.fptcloud.com/admin-bds/odoo/avatar.jpg_2e826f43fcd28fbd4d6f4479dfe213c9646e6ef0" />
+  <link rel="icon" type="image/png" href="images/Logo-Queen-Land-01.png" />
   
   <!-- Font chữ Plus Jakarta Sans -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1220,8 +1220,8 @@
     >
       <!-- Brand Logo Header -->
       <div class="p-4 border-b border-slate-100 flex flex-col items-center justify-center bg-white h-16 shrink-0">
-        <a href="#" class="flex items-center justify-center outline-none w-full">
-          <img src="images/Logo-Queen-Land-01.png" class="max-h-12 object-contain" alt="Queen Land Logo">
+        <a href="https://salehub.dev" class="flex items-center justify-center outline-none w-full">
+          <img src="images/Logo-Queen-Land-01.png" class="max-h-12 object-contain" alt="Salehub Logo">
         </a>
       </div>
 
@@ -1330,7 +1330,7 @@
       </header>
 
       <!-- Main workspace -->
-      <main class="flex-grow p-4 md:p-6 space-y-6 max-w-[1400px] w-full mx-auto">
+      <main class="flex-grow p-3 md:p-6 space-y-4 md:space-y-6 max-w-[1400px] w-full mx-auto">
         <!-- Breadcrumbs -->
         <div class="flex justify-between items-center text-xs text-slate-400 font-semibold">
           <nav class="flex items-center gap-1.5">
@@ -1377,14 +1377,14 @@
           </div>
         </div>
       <!-- Main Workspace Split -->
-      <div v-if="activeTab !== 'compare'" class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+      <div v-if="activeTab !== 'compare'" class="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-8 items-start">
         
         <!-- Cột Trái - 75% -->
         <div :class="activeTab === 'building' ? 'lg:col-span-4 space-y-6' : 'lg:col-span-3 space-y-6'">
           
           <!-- TAB 1: TỔNG QUAN -->
           <div v-if="activeTab === 'overview'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               
               <!-- Image Slider (Khớp screenshot) -->
               <div class="relative rounded-xl h-[200px] sm:h-[320px] md:h-[420px] group glow-border-card">
@@ -1698,7 +1698,7 @@
               </div>
 
               <!-- Carousel Tiện ích -->
-              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
                 <div class="text-center space-y-2 flex flex-col items-center justify-center">
                   <h4 class="text-h1 uppercase tracking-wide text-primary">Tiện ích nội khu</h4>
                   <div class="w-12 h-1 bg-emerald-500 rounded-full"></div>
@@ -1846,7 +1846,7 @@
 
           <!-- TAB 2: VỊ TRÍ -->
           <div v-else-if="activeTab === 'location'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <div class="space-y-3">
                 <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                   <i class="bi bi-geo text-primary"></i> Vị trí địa lý
@@ -1866,7 +1866,7 @@
 
           <!-- TAB 3: ĐÀO TẠO -->
           <div v-else-if="activeTab === 'training'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
                   <i class="bi bi-mortarboard text-primary"></i> Tài liệu Đào tạo & Sales Kit
@@ -1919,7 +1919,7 @@
 
           <!-- TAB 4: MẶT BẰNG -->
           <div v-else-if="activeTab === 'layout'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                 <i class="bi bi-aspect-ratio text-primary"></i> Sơ đồ mặt bằng chi tiết & Thiết kế căn hộ
               </h4>
@@ -2068,7 +2068,7 @@
               </div>
 
               <!-- 2. Apartment list and Floor Selector container -->
-              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
                 
                 <!-- Header with Floor selector dropdown -->
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 pb-3 gap-4">
@@ -2276,7 +2276,7 @@
 
           <!-- TAB 7: QUỸ CĂN (Live Lock Requests List) -->
           <div v-else-if="activeTab === 'lock_requests'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                 <i class="bi bi-file-lock text-primary"></i> Quỹ căn đang giữ chỗ tạm thời (Môi giới khóa)
               </h4>
@@ -2317,7 +2317,7 @@
 
           <!-- TAB 8: VIRTUAL TOUR 360 -->
           <div v-else-if="activeTab === 'tour360'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                 <i class="bi bi-camera-video text-primary"></i> Tham quan thực tế ảo Virtual Tour 360°
               </h4>
@@ -2338,7 +2338,7 @@
           <!-- TAB 9: CHÍNH SÁCH BÁN HÀNG -->
           <div v-else-if="activeTab === 'policy'" class="space-y-6">
             <!-- 1. PHƯƠNG ÁN THANH TOÁN & CHÍNH SÁCH BÁN HÀNG THỰC TẾ -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <div class="space-y-1">
                 <h3 class="text-caption text-emerald-500 flex items-center gap-1.5">
                   <i class="bi bi-percent"></i> CHƯƠNG TRÌNH ƯU ĐÃI & THANH TOÁN
@@ -2580,7 +2580,7 @@
             <!-- 2. CASH FLOW CALCULATOR & ANALYSIS SECTION -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <!-- Left: Flow Calculator Controls -->
-              <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
                 <h4 class="text-h2 flex items-center gap-2 border-b border-slate-100 pb-3 font-label uppercase">
                   <i class="bi bi-calculator text-primary"></i> Công Cụ Tính Dòng Tiền Trả Góp
                 </h4>
@@ -2703,7 +2703,7 @@
             </div>
 
             <!-- 3. CHÍNH SÁCH ƯU ĐÃI & QUÀ TẶNG (Ảnh văn bản CSBH) -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <div class="space-y-3">
                 <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                   <i class="bi bi-bookmark-check text-[#169f72]"></i> Văn Bản Chính Sách Bán Hàng & Ưu Đãi
@@ -2758,7 +2758,7 @@
 
           <!-- TAB 10: TIẾN ĐỘ -->
           <div v-else-if="activeTab === 'progress'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                 <i class="bi bi-calendar-event text-primary"></i> Nhật ký tiến độ thi công thực tế
               </h4>
@@ -2773,7 +2773,7 @@
 
           <!-- TAB 12: TIN TỨC -->
           <div v-else-if="activeTab === 'news'" class="space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+            <div class="bg-white p-4 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 md:space-y-6">
               <h4 class="text-sm font-extrabold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2 flex items-center gap-2">
                 <i class="bi bi-newspaper text-primary"></i> Tin tức dự án Vinhomes Global Gate Hạ Long
               </h4>
@@ -2914,7 +2914,7 @@
             <!-- Broker Card -->
             <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm text-center">
               <div class="w-20 h-20 rounded-full overflow-hidden mx-auto border-2 border-[#FFD5AE] shadow-md bg-slate-50">
-                <img src="https://s3-hfx03.fptcloud.com/admin-bds/odoo/avatar.jpg_2e826f43fcd28fbd4d6f4479dfe213c9646e6ef0" class="w-full h-full object-cover" alt="Broker" loading="lazy">
+                <img :src="project?.avatar_url || 'https://s3-hfx03.fptcloud.com/admin-bds/odoo/avatar.jpg_2e826f43fcd28fbd4d6f4479dfe213c9646e6ef0'" class="w-full h-full object-cover" alt="Broker" loading="lazy">
               </div>
               <h4 class="font-extrabold text-slate-800 text-base mt-4 font-label">Minh Phương</h4>
               <p class="text-[9px] font-extrabold text-[#169f72] bg-[#FFD5AE]/30 border border-[#FFD5AE]/60 rounded-full py-0.5 px-3 inline-block uppercase tracking-widest mt-1.5 font-label">Admin Dự Án</p>
@@ -2924,13 +2924,13 @@
                   <i class="bi bi-telephone-fill text-primary text-sm"></i>
                   0372.609.495
                 </a>
-                <a href="mailto:minhphuong.queenland@gmail.com" class="flex items-center gap-2.5 text-slate-600 hover:text-primary transition-colors font-bold">
+                <a href="mailto:contact@salehub.dev" class="flex items-center gap-2.5 text-slate-600 hover:text-primary transition-colors font-bold">
                   <i class="bi bi-envelope-fill text-primary text-sm"></i>
-                  minhphuong.queenland@gmail.com
+                  contact@salehub.dev
                 </a>
                 <span class="flex items-center gap-2.5 text-slate-600 font-bold">
                   <i class="bi bi-award-fill text-primary text-sm"></i>
-                  Thương hiệu: QueenLand
+                  Thương hiệu: Salehub
                 </span>
               </div>
               <a 
@@ -3476,7 +3476,7 @@
               <!-- 6. KHỐI MÔI GIỚI (giống ảnh mẫu - NÚT BẤM BÊN PHẢI BẢN NẰM NGANG) -->
               <div class="flex items-center justify-between bg-slate-50/70 p-2.5 rounded-xl border border-slate-100">
                 <div class="flex items-center gap-2.5">
-                  <img src="https://s3-hfx03.fptcloud.com/admin-bds/odoo/avatar.jpg_2e826f43fcd28fbd4d6f4479dfe213c9646e6ef0" class="w-9 h-9 rounded-full object-cover border border-slate-200 shadow-inner" alt="Broker" loading="lazy">
+                  <img :src="project?.avatar_url || 'https://s3-hfx03.fptcloud.com/admin-bds/odoo/avatar.jpg_2e826f43fcd28fbd4d6f4479dfe213c9646e6ef0'" class="w-9 h-9 rounded-full object-cover border border-slate-200 shadow-inner" alt="Broker" loading="lazy">
                   <div>
                     <div class="flex items-center gap-1">
                       <span class="text-xs font-black text-slate-800">Minh Phương</span>
@@ -4111,8 +4111,8 @@
             </a>
             
             <!-- N: Email -->
-            <a href="mailto:minhphuong.queenland@gmail.com" class="social-flip-node" aria-label="Email" style="--index: 2;">
-              <span class="social-tooltip">Email: minhphuong.queenland@gmail.com</span>
+            <a href="mailto:contact@salehub.dev" class="social-flip-node" aria-label="Email" style="--index: 2;">
+              <span class="social-tooltip">Email: contact@salehub.dev</span>
               <div class="social-flip-inner">
                 <div class="social-flip-front">N</div>
                 <div class="social-flip-back ms-color"><i class="bi bi-envelope-fill"></i></div>
@@ -4170,11 +4170,11 @@
           <ul class="space-y-3 text-sm">
             <li class="flex items-center gap-2">
               <i class="bi bi-geo-alt-fill text-accent"></i>
-              <span>Công ty giao dịch BĐS QueenLand, Hà Nội</span>
+              <span>Salehub, Hà Nội</span>
             </li>
             <li class="flex items-center gap-2">
               <i class="bi bi-envelope-fill text-accent"></i>
-              <a href="mailto:minhphuong.queenland@gmail.com" class="hover:text-white">minhphuong.queenland@gmail.com</a>
+              <a href="mailto:contact@salehub.dev" class="hover:text-white">contact@salehub.dev</a>
             </li>
             <li class="flex items-center gap-2">
               <i class="bi bi-telephone-fill text-accent"></i>
@@ -4186,7 +4186,7 @@
       <!-- Copyright block for both desktop and mobile -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-center" style="margin-top: 40px; padding-top: 24px; padding-bottom: 24px;">
         <span class="text-xs text-slate-500 block">
-          @2026 Bản quyền thuộc về Digital Marketing - Queen Land.
+          @2026 Bản quyền thuộc về Salehub.dev - Một sản phẩm của Queen Land Group.
         </span>
       </div>
     </footer>
@@ -4218,7 +4218,7 @@
                 <img src="images/gantalk.png" alt="Gàn AI">
               </div>
               <div class="gan-chat-header-info">
-                <h4 class="gan-chat-header-title">ADMIN Queenland</h4>
+                <h4 class="gan-chat-header-title">ADMIN Salehub</h4>
                 <span class="gan-chat-header-status">
                   <span class="gan-chat-header-status-dot"></span>
                   Trực tuyến
@@ -4347,6 +4347,20 @@
     window.__PRODUCTS__ = []
     window.__APARTMENT_IMAGES__ = {"BM25-07":"images/apartments/BM25-07.png","BM25-54":"images/apartments/BM25-54.png","BM34-73":"images/apartments/BM34-73.png","BM60-23":"images/apartments/BM60-23.png","BM65-08":"images/apartments/BM65-08.png","BM69-19":"images/apartments/BM69-19.png","BM73-38":"images/apartments/BM73-38.png","BM79-11":"images/apartments/BM79-11.png","BM87-06":"images/apartments/BM87-06.png","BM87-10":"images/apartments/BM87-10.png","TĐ-38":"images/apartments/TĐ-38.jpg","TĐ2-38":"images/apartments/TĐ-38.jpg"}
     window.__CALCULATION_SHEETS__ = {"BM34-73":"https://drive.google.com/drive/folders/1CMBWss45Xk4rIghpsrBxgELdSCCsDtwb","BM25-54":"https://drive.google.com/drive/folders/1KyIkCO1VgZ_PtzeoHgM1B8yztlOnW-l6","BM79-11":"https://drive.google.com/drive/folders/1B0CEA4ejVwgslZefvtFcPuoxk01cRosK","BM73-38":"https://drive.google.com/drive/folders/1hYw-Upc7uYhXC_al8DScWQqPQMoRThvU","BM69-19":"https://drive.google.com/drive/folders/1LU8Cwzelf0kwds6YFIY7VygVZwluqQ4I","BM65-08":"https://drive.google.com/drive/folders/1LCqbvDgWhEOTrAxBE9tJxdNosU0boayi","BM60-23":"https://drive.google.com/drive/folders/1ukYBJYB0kbcP0pdr6n_b_VRNDClyb_KN","TĐ2-38":"https://drive.google.com/drive/folders/1ldnVqlwyVYInpz4QQ3Edmv-NO_rKO7Oq","BM25-07":"https://drive.google.com/drive/folders/1IIQ1y8d7iEoWFG_MtFzx-k18tzzQ8F5I","BM87-06":"https://drive.google.com/drive/folders/1ZdYorSaqjfl5BRnck-jzhx94B6IQzn1Y","BM87-10":"https://drive.google.com/drive/folders/1mpkcYqD41Pfx1fzJ0gwMyi-_r1k76tac"}
+  </script>
+
+  <script>
+    // Cập nhật động favicon dựa trên ảnh dự án thực tế
+    (function() {
+      const proj = window.__VGGHL_DATA__?.project;
+      if (proj && proj.avatar_url) {
+        const favicon = document.querySelector("link[rel~='icon']") || document.createElement('link');
+        favicon.type = 'image/png';
+        favicon.rel = 'icon';
+        favicon.href = proj.avatar_url;
+        document.getElementsByTagName('head')[0].appendChild(favicon);
+      }
+    })();
   </script>
 
   <!-- Script điều khiển Vue -->
@@ -5463,7 +5477,7 @@ const { createApp, ref, computed, watch, onMounted, onUnmounted } = Vue;
             chatMessages.value = [
               {
                 sender: 'broker',
-                text: '👋 Chào Anh/Chị! Em là Admin QueenLand - trợ lý 24/7.<br><br>Anh chị đang cần hỗ trợ thông tin nào về dự án ạ?',
+                text: '👋 Chào Anh/Chị! Em là Admin Salehub - trợ lý 24/7.<br><br>Anh chị đang cần hỗ trợ thông tin nào về dự án ạ?',
                 time: timeStr
               }
             ];
@@ -5503,7 +5517,7 @@ const { createApp, ref, computed, watch, onMounted, onUnmounted } = Vue;
             if (textLower.includes('giá') || textLower.includes('bảng hàng') || textLower.includes('chính sách')) {
               reply = 'Dạ anh/chị, bảng giá và chính sách bán hàng mới nhất của Vinhomes Global Gate Hạ Long đang được em cập nhật liên tục. Để nhận file PDF bảng hàng và chính sách bán hàng trực tiếp, anh/chị có thể kết bạn Zalo với đại diện tư vấn Minh Phương qua số <strong>0372.609.495</strong> hoặc click vào liên kết Zalo này nhé: <a href="https://zalo.me/0372609495" target="_blank" class="text-blue-600 hover:text-blue-800 underline font-extrabold">zalo.me/0372609495</a>.';
             } else if (textLower.includes('dòng tiền') || textLower.includes('trả góp') || textLower.includes('tài chính') || textLower.includes('vay')) {
-              reply = 'Dạ, phương án tính dòng tiền trả góp rất quan trọng khi mua Vinhomes Global Gate Hạ Long. ADMIN Queenland có thể lập bảng tính chi tiết tiến độ thanh toán và gói vay cho riêng căn hộ anh/chị chọn. Anh/chị vui lòng để lại Số điện thoại hoặc kết bạn nhanh qua Zalo <strong>0372.609.495</strong> để em báo chuyên viên gửi bảng tính dòng tiền chi tiết ạ!';
+              reply = 'Dạ, phương án tính dòng tiền trả góp rất quan trọng khi mua Vinhomes Global Gate Hạ Long. ADMIN Salehub có thể lập bảng tính chi tiết tiến độ thanh toán và gói vay cho riêng căn hộ anh/chị chọn. Anh/chị vui lòng để lại Số điện thoại hoặc kết bạn nhanh qua Zalo <strong>0372.609.495</strong> để em báo chuyên viên gửi bảng tính dòng tiền chi tiết ạ!';
             } else if (textLower.includes('lịch') || textLower.includes('nhà mẫu') || textLower.includes('xem')) {
               reply = 'Dạ vâng! nhà mẫu dự án Vinhomes Global Gate Hạ Long luôn mở cửa đón tiếp khách hàng. Anh/chị dự kiến đi xem vào ngày nào trong tuần ạ? Anh/chị nhắn em Số điện thoại hoặc liên hệ Hotline <strong>0372.609.495</strong> để em đăng ký thẻ cư dân vào tham quan nhé!';
             } else if (textLower.includes('zalo') || textLower.includes('liên hệ') || textLower.includes('tư vấn') || textLower.includes('trực tiếp') || textLower.includes('huy hưng') || textLower.includes('broker') || textLower.includes('chuyên viên')) {
