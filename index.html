@@ -161,6 +161,17 @@
       filter: none !important;
     }
 
+    .slider-img {
+      object-fit: contain !important;
+      background-color: #020617 !important;
+    }
+    @media (min-width: 768px) {
+      .slider-img {
+        object-fit: cover !important;
+        background-color: transparent !important;
+      }
+    }
+
     /* Lightbox Modal transition & zoom styles */
     .lightbox-fade-enter-active, .lightbox-fade-leave-active {
       transition: opacity 0.25s ease;
@@ -1409,7 +1420,7 @@
               <!-- Image Slider (Khớp screenshot) -->
               <div class="relative rounded-xl h-[200px] sm:h-[320px] md:h-[420px] group glow-border-card">
                 <div class="w-full h-full rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shadow-inner relative isolate">
-                  <img :src="project?.sliderImages?.[activeSlideIndex]" class="w-full h-full object-contain md:object-cover transition-all duration-500" alt="Slider Image">
+                  <img :src="project?.sliderImages?.[activeSlideIndex]" class="w-full h-full slider-img transition-all duration-500" alt="Slider Image">
                   
                   <!-- Left/Right Arrows -->
                   <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10 border border-white/10">
