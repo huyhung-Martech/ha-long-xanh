@@ -1408,8 +1408,8 @@
               
               <!-- Image Slider (Khớp screenshot) -->
               <div class="relative rounded-xl h-[200px] sm:h-[320px] md:h-[420px] group glow-border-card">
-                <div class="w-full h-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner relative isolate">
-                  <img :src="project?.sliderImages?.[activeSlideIndex]" class="w-full h-full object-cover transition-all duration-500" alt="Slider Image">
+                <div class="w-full h-full rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shadow-inner relative isolate">
+                  <img :src="project?.sliderImages?.[activeSlideIndex]" class="w-full h-full object-contain md:object-cover transition-all duration-500" alt="Slider Image">
                   
                   <!-- Left/Right Arrows -->
                   <button @click="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10 border border-white/10">
@@ -1422,10 +1422,10 @@
                   <!-- Page Info Overlay (Logo + Slogan) -->
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 pointer-events-none">
                     <div class="flex items-center gap-3 mb-2">
-                      <span class="text-white text-xl font-black uppercase tracking-wider bg-black/20 px-3 py-1 rounded border border-white/10">VINHOMES</span>
+                      <span class="text-white text-xs md:text-xl font-black uppercase tracking-wider bg-black/20 px-2.5 py-0.5 md:px-3 md:py-1 rounded border border-white/10">VINHOMES</span>
                     </div>
-                    <p class="text-white text-lg font-bold">{{ project?.slogan }}</p>
-                    <p class="text-slate-300 text-xs mt-1 flex items-center gap-1">
+                    <p class="text-white text-sm md:text-lg font-bold">{{ project?.slogan }}</p>
+                    <p class="text-slate-300 text-[10px] md:text-xs mt-1 flex items-center gap-1">
                       <i class="bi bi-geo-alt-fill text-primary"></i>
                       {{ project?.address || 'Phường Tuần Châu, Hà An, Đông Mai, Quảng Ninh' }}
                     </p>
