@@ -3323,7 +3323,7 @@
             
             <!-- Container Ảnh -->
             <div class="flex-grow flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-[380px] relative group border border-slate-100/60 rounded-xl bg-slate-50 p-2">
-              <img :src="getApartmentImage(selectedProductDetails.code, selectedProductDetails.type)" class="max-h-full max-w-full object-contain rounded" :alt="\'Mặt bằng căn hộ \' + selectedProductDetails.code" draggable="false" loading="lazy">
+              <img :src="getApartmentImage(selectedProductDetails.code, selectedProductDetails.type)" class="max-h-full max-w-full object-contain rounded" :alt="'Mặt bằng căn hộ ' + selectedProductDetails.code" draggable="false" loading="lazy">
               
               <!-- 3 nút tròn mờ đè ở góc trên bên phải ảnh (giống ảnh mẫu - NẰM NGANG) -->
               <div class="absolute top-3 right-3 flex flex-row gap-2">
@@ -3865,12 +3865,16 @@
 
         <!-- Canvas -->
         <div class="flex-1 w-full h-full flex items-center justify-center overflow-hidden" @wheel.prevent="handleLightboxWheel">
-          <img :src="getApartmentImage(selectedProductDetails.code, selectedProductDetails.type)" class="max-h-full max-w-full object-contain rounded" :alt="\'Mặt bằng căn hộ \' + selectedProductDetails.code" draggable="false" loading="lazy"> 1.0 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'"
+          <img :src="getApartmentImage(selectedProductDetails.code, selectedProductDetails.type)" 
+            class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl lightbox-img"
+            :class="lightboxScale > 1.0 ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'"
             :style="{ transform: 'translate(' + lightboxPanX + 'px, ' + lightboxPanY + 'px) scale(' + lightboxScale + ')' }"
             @mousedown.prevent="handleLightboxMouseDown"
             @touchstart="handleLightboxTouchStart"
             @click.stop
-           loading="lazy">
+            :alt="'Mặt bằng căn hộ ' + selectedProductDetails.code"
+            draggable="false"
+            loading="lazy">
         </div>
 
         <!-- Controls footer -->
